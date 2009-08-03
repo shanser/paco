@@ -21,23 +21,24 @@ class TachesControllerTest < ActionController::TestCase
   end
 
   test "should show tache" do
-    get :show, :id => taches(:one).to_param
+    get :show, :id => Factory(:tache)
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => taches(:one).to_param
+    get :edit, :id => Factory(:tache)
     assert_response :success
   end
 
   test "should update tache" do
-    put :update, :id => taches(:one).to_param, :tache => { }
+    put :update, :id => Factory(:tache), :tache => { }
     assert_redirected_to tache_path(assigns(:tache))
   end
 
   test "should destroy tache" do
+    tache = Factory(:tache)
     assert_difference('Tache.count', -1) do
-      delete :destroy, :id => taches(:one).to_param
+      delete :destroy, :id => tache
     end
 
     assert_redirected_to taches_path

@@ -9,12 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090803150047) do
+ActiveRecord::Schema.define(:version => 20090803151141) do
 
   create_table "taches", :force => true do |t|
     t.text    "description"
     t.text    "commentaire"
-    t.integer "poids"
+    t.integer "poids",       :default => 1
     t.string  "statut"
     t.date    "date_entree"
     t.date    "date_sortie"

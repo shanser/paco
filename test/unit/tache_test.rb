@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class TacheTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+
+  test "une tâche doit avoir un poids par défaut de 1" do
+    assert_equal 1, Tache.new.poids
   end
 end
