@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Id</th>
     <th>Description</th>
     <th>Commentaire</th>
     <th>Poids</th>
@@ -12,6 +13,7 @@
 
 <% @taches.each do |tache| %>
   <tr>
+    <td><%=h tache.id %></td>
     <td><%=h tache.description %></td>
     <td><%=h tache.commentaire %></td>
     <td><%=h tache.poids %></td>
