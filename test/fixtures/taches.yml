@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  description: MyText
+  commentaire: MyText
+  poids: 1
+  statut: MyString
+  date_entree: 2009-08-03
+  date_sortie: 2009-08-03
+
+two:
+  description: MyText
+  commentaire: MyText
+  poids: 1
+  statut: MyString
+  date_entree: 2009-08-03
+  date_sortie: 2009-08-03

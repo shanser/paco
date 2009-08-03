@@ -1,0 +1,30 @@
+<h1>Listing taches</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Commentaire</th>
+    <th>Poids</th>
+    <th>Statut</th>
+    <th>Date entree</th>
+    <th>Date sortie</th>
+  </tr>
+
+<% @taches.each do |tache| %>
+  <tr>
+    <td><%=h tache.description %></td>
+    <td><%=h tache.commentaire %></td>
+    <td><%=h tache.poids %></td>
+    <td><%=h tache.statut %></td>
+    <td><%=h tache.date_entree %></td>
+    <td><%=h tache.date_sortie %></td>
+    <td><%= link_to 'Show', tache %></td>
+    <td><%= link_to 'Edit', edit_tache_path(tache) %></td>
+    <td><%= link_to 'Destroy', tache, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New tache', new_tache_path %>

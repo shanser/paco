@@ -1,0 +1,33 @@
+<p>
+  <b>Description:</b>
+  <%=h @tache.description %>
+</p>
+
+<p>
+  <b>Commentaire:</b>
+  <%=h @tache.commentaire %>
+</p>
+
+<p>
+  <b>Poids:</b>
+  <%=h @tache.poids %>
+</p>
+
+<p>
+  <b>Statut:</b>
+  <%=h @tache.statut %>
+</p>
+
+<p>
+  <b>Date entree:</b>
+  <%=h @tache.date_entree %>
+</p>
+
+<p>
+  <b>Date sortie:</b>
+  <%=h @tache.date_sortie %>
+</p>
+
+
+<%= link_to 'Edit', edit_tache_path(@tache) %> |
+<%= link_to 'Back', taches_path %>
