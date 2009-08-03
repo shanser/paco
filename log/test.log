@@ -1,0 +1,463 @@
+Unable to load tach, underlying cause no such file to load -- tach 
+
+ /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:158:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:265:in `require_or_load'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:224:in `depend_on'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:136:in `require_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:850:in `try_to_load_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:865:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `each'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:845:in `fixtures'
+./test/test_helper.rb:35
+./test/unit/helpers/taches_helper_test.rb:1:in `require'
+./test/unit/helpers/taches_helper_test.rb:1
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5:in `load'
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5:in `each'
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5
+Unable to load tach, underlying cause no such file to load -- tach 
+
+ /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:158:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:265:in `require_or_load'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:224:in `depend_on'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:136:in `require_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:850:in `try_to_load_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:865:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `each'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:845:in `fixtures'
+./test/test_helper.rb:35
+./test/functional/taches_controller_test.rb:1:in `require'
+./test/functional/taches_controller_test.rb:1
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5:in `load'
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5:in `each'
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#create (for 0.0.0.0 at 2009-08-03 16:53:03) [POST]
+  Parameters: {"tache"=>{}}
+  [4;35;1mTache Create (0.5ms)[0m   [0mINSERT INTO "taches" ("date_sortie", "statut", "updated_at", "poids", "description", "date_entree", "commentaire", "created_at") VALUES(NULL, NULL, '2009-08-03 14:53:03', NULL, NULL, NULL, NULL, '2009-08-03 14:53:03')[0m
+Redirected to http://test.host/taches/5
+Completed in 8ms (DB: 2) | 302 Found [http://test.host/taches?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#index (for 0.0.0.0 at 2009-08-03 16:53:03) [GET]
+  [4;36;1mTache Load (0.4ms)[0m   [0;1mSELECT * FROM "taches" [0m
+Rendering template within layouts/taches
+Rendering taches/index
+
+
+Processing TachesController#new (for 0.0.0.0 at 2009-08-03 16:53:03) [GET]
+Rendering template within layouts/taches
+Rendering taches/new
+Completed in 104ms (View: 103, DB: 0) | 200 OK [http://test.host/taches/new]
+Unable to load tach, underlying cause no such file to load -- tach 
+
+ /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:158:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:265:in `require_or_load'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:224:in `depend_on'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:136:in `require_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:850:in `try_to_load_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:865:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `each'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:845:in `fixtures'
+./test/test_helper.rb:35
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+./test/unit/tache_test.rb:1
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+-e:1
+-e:1:in `each'
+-e:1
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#create (for 0.0.0.0 at 2009-08-03 16:53:17) [POST]
+  Parameters: {"tache"=>{}}
+  [4;35;1mTache Create (0.3ms)[0m   [0mINSERT INTO "taches" ("date_sortie", "statut", "updated_at", "poids", "description", "date_entree", "commentaire", "created_at") VALUES(NULL, NULL, '2009-08-03 14:53:17', NULL, NULL, NULL, NULL, '2009-08-03 14:53:17')[0m
+Redirected to http://test.host/taches/7
+Completed in 6ms (DB: 1) | 302 Found [http://test.host/taches?]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#index (for 0.0.0.0 at 2009-08-03 16:53:17) [GET]
+  [4;36;1mTache Load (0.4ms)[0m   [0;1mSELECT * FROM "taches" [0m
+Rendering template within layouts/taches
+Rendering taches/index
+
+
+Processing TachesController#new (for 0.0.0.0 at 2009-08-03 16:53:17) [GET]
+Rendering template within layouts/taches
+Rendering taches/new
+Completed in 21ms (View: 21, DB: 0) | 200 OK [http://test.host/taches/new]
+Unable to load tach, underlying cause no such file to load -- tach 
+
+ /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:158:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:265:in `require_or_load'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:224:in `depend_on'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:136:in `require_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:850:in `try_to_load_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:865:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `each'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:845:in `fixtures'
+./test/test_helper.rb:35
+./test/unit/helpers/taches_helper_test.rb:1:in `require'
+./test/unit/helpers/taches_helper_test.rb:1
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5:in `load'
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5:in `each'
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5
+Unable to load tach, underlying cause no such file to load -- tach 
+
+ /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:158:in `require'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:265:in `require_or_load'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:224:in `depend_on'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:136:in `require_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:850:in `try_to_load_dependency'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:865:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `each'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:862:in `require_fixture_classes'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.2/lib/active_record/fixtures.rb:845:in `fixtures'
+./test/test_helper.rb:35
+./test/functional/taches_controller_test.rb:1:in `require'
+./test/functional/taches_controller_test.rb:1
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5:in `load'
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5:in `each'
+/Library/Ruby/Gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader.rb:5
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#create (for 0.0.0.0 at 2009-08-03 16:53:34) [POST]
+  Parameters: {"tache"=>{}}
+  [4;35;1mTache Create (0.3ms)[0m   [0mINSERT INTO "taches" ("date_sortie", "statut", "updated_at", "poids", "description", "date_entree", "commentaire", "created_at") VALUES(NULL, NULL, '2009-08-03 14:53:34', NULL, NULL, NULL, NULL, '2009-08-03 14:53:34')[0m
+Redirected to http://test.host/taches/5
+Completed in 6ms (DB: 1) | 302 Found [http://test.host/taches?]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#index (for 0.0.0.0 at 2009-08-03 16:53:34) [GET]
+  [4;36;1mTache Load (0.3ms)[0m   [0;1mSELECT * FROM "taches" [0m
+Rendering template within layouts/taches
+Rendering taches/index
+
+
+Processing TachesController#new (for 0.0.0.0 at 2009-08-03 16:53:34) [GET]
+Rendering template within layouts/taches
+Rendering taches/new
+Completed in 21ms (View: 21, DB: 0) | 200 OK [http://test.host/taches/new]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#create (for 0.0.0.0 at 2009-08-03 16:55:52) [POST]
+  Parameters: {"tache"=>{}}
+  [4;35;1mTache Create (0.3ms)[0m   [0mINSERT INTO "taches" ("date_sortie", "statut", "updated_at", "poids", "description", "date_entree", "commentaire", "created_at") VALUES(NULL, NULL, '2009-08-03 14:55:52', NULL, NULL, NULL, NULL, '2009-08-03 14:55:52')[0m
+Redirected to http://test.host/taches/996332878
+Completed in 6ms (DB: 1) | 302 Found [http://test.host/taches?]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#destroy (for 0.0.0.0 at 2009-08-03 16:55:52) [DELETE]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+  [4;36;1mTache Destroy (0.2ms)[0m   [0;1mDELETE FROM "taches" WHERE "id" = 953125641[0m
+Redirected to http://test.host/taches
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/taches/953125641]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.3ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#edit (for 0.0.0.0 at 2009-08-03 16:55:52) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/edit
+Completed in 9ms (View: 8, DB: 1) | 200 OK [http://test.host/taches/953125641/edit]
+
+
+Processing TachesController#index (for 0.0.0.0 at 2009-08-03 16:55:52) [GET]
+  [4;36;1mTache Load (0.3ms)[0m   [0;1mSELECT * FROM "taches" [0m
+Rendering template within layouts/taches
+Rendering taches/index
+Completed in 4ms (View: 4, DB: 0) | 200 OK [http://test.host/taches]
+
+
+Processing TachesController#new (for 0.0.0.0 at 2009-08-03 16:55:52) [GET]
+Rendering template within layouts/taches
+Rendering taches/new
+Completed in 21ms (View: 21, DB: 0) | 200 OK [http://test.host/taches/new]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#show (for 0.0.0.0 at 2009-08-03 16:55:52) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;36;1mTache Load (0.3ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/show
+Completed in 3ms (View: 2, DB: 1) | 200 OK [http://test.host/taches/953125641]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#update (for 0.0.0.0 at 2009-08-03 16:55:52) [PUT]
+  Parameters: {"tache"=>{}, "id"=>"953125641"}
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Redirected to http://test.host/taches/953125641
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/taches/953125641?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#create (for 0.0.0.0 at 2009-08-03 16:55:59) [POST]
+  Parameters: {"tache"=>{}}
+  [4;35;1mTache Create (0.3ms)[0m   [0mINSERT INTO "taches" ("date_sortie", "statut", "updated_at", "poids", "description", "date_entree", "commentaire", "created_at") VALUES(NULL, NULL, '2009-08-03 14:55:59', NULL, NULL, NULL, NULL, '2009-08-03 14:55:59')[0m
+Redirected to http://test.host/taches/996332878
+Completed in 6ms (DB: 2) | 302 Found [http://test.host/taches?]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#destroy (for 0.0.0.0 at 2009-08-03 16:55:59) [DELETE]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+  [4;36;1mTache Destroy (0.2ms)[0m   [0;1mDELETE FROM "taches" WHERE "id" = 953125641[0m
+Redirected to http://test.host/taches
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/taches/953125641]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.4ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#edit (for 0.0.0.0 at 2009-08-03 16:55:59) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/edit
+Completed in 9ms (View: 8, DB: 1) | 200 OK [http://test.host/taches/953125641/edit]
+
+
+Processing TachesController#index (for 0.0.0.0 at 2009-08-03 16:56:00) [GET]
+  [4;36;1mTache Load (0.5ms)[0m   [0;1mSELECT * FROM "taches" [0m
+Rendering template within layouts/taches
+Rendering taches/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://test.host/taches]
+
+
+Processing TachesController#new (for 0.0.0.0 at 2009-08-03 16:56:00) [GET]
+Rendering template within layouts/taches
+Rendering taches/new
+Completed in 21ms (View: 21, DB: 0) | 200 OK [http://test.host/taches/new]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#show (for 0.0.0.0 at 2009-08-03 16:56:00) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/taches/953125641]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#update (for 0.0.0.0 at 2009-08-03 16:56:00) [PUT]
+  Parameters: {"tache"=>{}, "id"=>"953125641"}
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Redirected to http://test.host/taches/953125641
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/taches/953125641?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#create (for 0.0.0.0 at 2009-08-03 17:02:20) [POST]
+  Parameters: {"tache"=>{}}
+  [4;35;1mTache Create (0.4ms)[0m   [0mINSERT INTO "taches" ("date_sortie", "statut", "updated_at", "poids", "description", "date_entree", "commentaire", "created_at") VALUES(NULL, NULL, '2009-08-03 15:02:20', NULL, NULL, NULL, NULL, '2009-08-03 15:02:20')[0m
+Redirected to http://test.host/taches/996332878
+Completed in 6ms (DB: 1) | 302 Found [http://test.host/taches?]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#destroy (for 0.0.0.0 at 2009-08-03 17:02:20) [DELETE]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+  [4;36;1mTache Destroy (0.2ms)[0m   [0;1mDELETE FROM "taches" WHERE "id" = 953125641[0m
+Redirected to http://test.host/taches
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/taches/953125641]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.3ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#edit (for 0.0.0.0 at 2009-08-03 17:02:20) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/edit
+Completed in 9ms (View: 8, DB: 1) | 200 OK [http://test.host/taches/953125641/edit]
+
+
+Processing TachesController#index (for 0.0.0.0 at 2009-08-03 17:02:20) [GET]
+  [4;36;1mTache Load (0.4ms)[0m   [0;1mSELECT * FROM "taches" [0m
+Rendering template within layouts/taches
+Rendering taches/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://test.host/taches]
+
+
+Processing TachesController#new (for 0.0.0.0 at 2009-08-03 17:02:20) [GET]
+Rendering template within layouts/taches
+Rendering taches/new
+Completed in 21ms (View: 20, DB: 0) | 200 OK [http://test.host/taches/new]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#show (for 0.0.0.0 at 2009-08-03 17:02:20) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/show
+Completed in 3ms (View: 2, DB: 1) | 200 OK [http://test.host/taches/953125641]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#update (for 0.0.0.0 at 2009-08-03 17:02:20) [PUT]
+  Parameters: {"tache"=>{}, "id"=>"953125641"}
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Redirected to http://test.host/taches/953125641
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/taches/953125641?]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#create (for 0.0.0.0 at 2009-08-03 17:02:51) [POST]
+  Parameters: {"tache"=>{}}
+  [4;35;1mTache Create (0.3ms)[0m   [0mINSERT INTO "taches" ("date_sortie", "statut", "poids", "description", "date_entree", "commentaire") VALUES(NULL, NULL, NULL, NULL, NULL, NULL)[0m
+Redirected to http://test.host/taches/996332878
+Completed in 5ms (DB: 1) | 302 Found [http://test.host/taches?]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#destroy (for 0.0.0.0 at 2009-08-03 17:02:51) [DELETE]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+  [4;36;1mTache Destroy (0.2ms)[0m   [0;1mDELETE FROM "taches" WHERE "id" = 953125641[0m
+Redirected to http://test.host/taches
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/taches/953125641]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.3ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#edit (for 0.0.0.0 at 2009-08-03 17:02:51) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/edit
+Completed in 9ms (View: 8, DB: 1) | 200 OK [http://test.host/taches/953125641/edit]
+
+
+Processing TachesController#index (for 0.0.0.0 at 2009-08-03 17:02:51) [GET]
+  [4;36;1mTache Load (0.3ms)[0m   [0;1mSELECT * FROM "taches" [0m
+Rendering template within layouts/taches
+Rendering taches/index
+Completed in 4ms (View: 4, DB: 0) | 200 OK [http://test.host/taches]
+
+
+Processing TachesController#new (for 0.0.0.0 at 2009-08-03 17:02:51) [GET]
+Rendering template within layouts/taches
+Rendering taches/new
+Completed in 21ms (View: 21, DB: 0) | 200 OK [http://test.host/taches/new]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#show (for 0.0.0.0 at 2009-08-03 17:02:51) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/taches/953125641]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#update (for 0.0.0.0 at 2009-08-03 17:02:51) [PUT]
+  Parameters: {"tache"=>{}, "id"=>"953125641"}
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Redirected to http://test.host/taches/953125641
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/taches/953125641?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+
+
+Processing TachesController#create (for 0.0.0.0 at 2009-08-03 17:02:56) [POST]
+  Parameters: {"tache"=>{}}
+  [4;35;1mTache Create (0.3ms)[0m   [0mINSERT INTO "taches" ("date_sortie", "statut", "poids", "description", "date_entree", "commentaire") VALUES(NULL, NULL, NULL, NULL, NULL, NULL)[0m
+Redirected to http://test.host/taches/996332878
+Completed in 5ms (DB: 1) | 302 Found [http://test.host/taches?]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#destroy (for 0.0.0.0 at 2009-08-03 17:02:56) [DELETE]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+  [4;36;1mTache Destroy (0.2ms)[0m   [0;1mDELETE FROM "taches" WHERE "id" = 953125641[0m
+Redirected to http://test.host/taches
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/taches/953125641]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "taches" [0m
+  [4;36;1mTache Load (0.3ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#edit (for 0.0.0.0 at 2009-08-03 17:02:56) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;35;1mTache Load (0.2ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/edit
+Completed in 9ms (View: 8, DB: 1) | 200 OK [http://test.host/taches/953125641/edit]
+
+
+Processing TachesController#index (for 0.0.0.0 at 2009-08-03 17:02:56) [GET]
+  [4;36;1mTache Load (0.3ms)[0m   [0;1mSELECT * FROM "taches" [0m
+Rendering template within layouts/taches
+Rendering taches/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://test.host/taches]
+
+
+Processing TachesController#new (for 0.0.0.0 at 2009-08-03 17:02:56) [GET]
+Rendering template within layouts/taches
+Rendering taches/new
+Completed in 21ms (View: 21, DB: 0) | 200 OK [http://test.host/taches/new]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#show (for 0.0.0.0 at 2009-08-03 17:02:56) [GET]
+  Parameters: {"id"=>"953125641"}
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Rendering template within layouts/taches
+Rendering taches/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/taches/953125641]
+  [4;35;1mTache Load (0.3ms)[0m   [0mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+
+
+Processing TachesController#update (for 0.0.0.0 at 2009-08-03 17:02:56) [PUT]
+  Parameters: {"tache"=>{}, "id"=>"953125641"}
+  [4;36;1mTache Load (0.2ms)[0m   [0;1mSELECT * FROM "taches" WHERE ("taches"."id" = 953125641) [0m
+Redirected to http://test.host/taches/953125641
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/taches/953125641?]
