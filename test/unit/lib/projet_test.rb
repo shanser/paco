@@ -3,32 +3,57 @@ require 'Projet'
 
 
 class ProjetTest < ActiveSupport::TestCase
+  attr_reader :demarrage
   
-  test "sait calculer date projection fin" do
-    demarrage = date_reference
-    dates_sortie = [demarrage + 2.days, demarrage + 4.days]
-    nombre_taches_finies_a_ces_dates = [1, 1]
-    resultat_requete = stub(:keys => dates_sortie, :values => nombre_taches_finies_a_ces_dates)
-    date_attendue = demarrage + 6.days
-
-    bouchonne_requetes_base resultat_requete, nb_total_taches = 3
-
-    assert_equal date_attendue, Projet.projection_date_fin
+  def setup
+    @demarrage = date_reference
+    Time.stubs(:now => demarrage + 4.days)
   end
 
-  test "génère une exception quand il n'y a pas assez de données pour calculer la régression" do
-    demarrage = date_reference
-    dates_sortie = [demarrage + 2.days]
-    nombre_taches_finies_a_ces_dates = [1]
-    resultat_requete = stub(:keys => dates_sortie, :values => nombre_taches_finies_a_ces_dates)
-
-    bouchonne_requetes_base resultat_requete, nb_total_taches = 3
+  test "génère une exception quand il n'y a aucune tâche terminée" do
+    bouchonne_taches_entrees [0], [3]
+    bouchonne_taches_sorties [], []
+    
+    assert_raise Paco::CalculProjectionImpossible do
+      Projet.projection_date_fin
+    end
+  end
+  
+  test "génère une exception quand le backlog se remplit aussi vite qu'il se vide" do
+    bouchonne_taches_entrees [0], [3]
+    bouchonne_taches_sorties [2], [1]
     
     assert_raise Paco::CalculProjectionImpossible do
       Projet.projection_date_fin
     end
   end
 
+  test "sait calculer date projection fin quand le backlog ne bouge pas" do
+    bouchonne_taches_entrees jours_apres_demarrage = [0], nb_taches_a_ces_jours = [3]
+    bouchonne_taches_sorties [2, 4], [1, 1]
+    date_attendue = demarrage + 6.days
+
+    assert_equal date_attendue, Projet.projection_date_fin
+  end
+
+  test "sait calculer date projection fin quand le backlog évolue" do
+    bouchonne_taches_entrees jours_apres_demarrage = [0, 4], nb_taches_a_ces_jours = [2, 1]
+    bouchonne_taches_sorties [2, 4], [1, 1]
+    date_attendue = demarrage + 8.days
+
+    assert_equal date_attendue, Projet.projection_date_fin
+  end
+  
+  test "nombre_taches_par_date rajoute un point au nuage si la dernière date retournée n'est pas aujourd'hui" do
+    Time.stubs(:now => demarrage + 6.days)
+
+    bouchonne_taches_sorties [2, 4], [1, 1]
+
+    nuage = Projet.nombre_taches_sorties_par_date
+    assert_equal 3, nuage.size
+    assert_equal [2, 4, 6].map { |i|  (demarrage + i.days).to_i}, nuage.xs
+    assert_equal [1, 2, 2], nuage.ys 
+  end
 
 
 
@@ -46,10 +71,22 @@ class ProjetTest < ActiveSupport::TestCase
   end
   
   private
-  def bouchonne_requetes_base resultat_requete, nb_total_taches
-    Tache.stubs(:count => nb_total_taches)
+  def bouchonne_requete_taches resultat_requete, parametres
     Tache.stubs(:count).
-          with(:order => :date_sortie, :group => :date_sortie, :conditions => "date_sortie IS NOT NULL").
-          returns(resultat_requete) 
+          with(parametres).
+          returns(resultat_requete)
+  end
+  def bouchonne_taches_entrees clefs, valeurs
+    bouchonne_requete_taches (faux_resultat clefs, valeurs), {:order => :date_entree, :group => :date_entree}
+  end
+  
+  def bouchonne_taches_sorties clefs, valeurs
+    bouchonne_requete_taches (faux_resultat clefs, valeurs), {:order => :date_sortie, :group => :date_sortie, :conditions => "date_sortie IS NOT NULL"}
+    
+  end
+  
+  def faux_resultat clefs, valeurs
+    dates = clefs.map { |clef| demarrage + clef.days}
+    stub(:keys => dates, :values => valeurs)
   end
 end

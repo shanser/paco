@@ -5,7 +5,7 @@ class TachesController < ApplicationController
     @taches = Tache.all
     begin
       prediction = Projet.projection_date_fin
-      @prediction_date_fin = "Paco prédit que le projet se finira le #{prediction.to_s :long}"
+      @prediction_date_fin = "Paco prédit que le projet se finira le #{prediction.strftime '%d %B %Y'}"
     rescue Paco::CalculProjectionImpossible
       @prediction_date_fin = 'Paco ne sait pas encore prédire la date de fin du projet'
     end

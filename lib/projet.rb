@@ -10,27 +10,47 @@ def cumuls valeurs
   resultat
 end
 
-
-class Projet
-  
-  def self.projection_date_fin
-    timestamps_dates_sortie, nombre_taches_finies_a_ces_dates = nombre_taches_finies_par_date
-    Time.at timestamp_projection(timestamps_dates_sortie, nombre_taches_finies_a_ces_dates)
-  end
-  
-
-  private
-  def self.timestamp_projection timestamps_dates_sortie, nombre_taches_finies_a_ces_dates
-    raise Paco::CalculProjectionImpossible if timestamps_dates_sortie.size < 2
-    lineFit = LineFit.new
-    lineFit.setData timestamps_dates_sortie, nombre_taches_finies_a_ces_dates
-    ordonnee_origine, pente = lineFit.coefficients
-    
-    (Tache.count - ordonnee_origine) / pente
-  end
-
-  def self.nombre_taches_finies_par_date
-    result = Tache.count(:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL")
-    [result.keys.map{|t| t.to_time.to_i}, cumuls(result.values)]
+class Date
+  def to_i
+    to_time.to_i
   end
 end
+
+class Projet
+
+  def self.projection_date_fin
+    nuage_points = nombre_taches_entrees_par_date
+    droite_entrees = nuage_points.regression_lineaire
+    droite_sorties = nombre_taches_sorties_par_date.regression_lineaire
+
+    Time.at timestamp_projection(droite_entrees, droite_sorties)
+  end
+
+  def self.nombre_taches_entrees_par_date
+    points = nombre_taches_par_date({:group => :date_entree, :order => :date_entree})
+  end
+
+  def self.nombre_taches_sorties_par_date
+    nombre_taches_par_date({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
+  end
+
+  private
+  def self.timestamp_projection droite_entrees, droite_sorties
+    droite_entrees.abcisse_intersection_avec droite_sorties
+  end
+  
+  def self.nombre_taches_par_date parametres_requete
+    result = Tache.count(parametres_requete)
+    xs = result.keys.map{|t| t.to_i}
+    ys = cumuls(result.values)
+    
+    aujourd_hui = Time.now.to_date.to_i
+    if xs.last != aujourd_hui
+      xs << aujourd_hui
+      ys << ys.last
+    end
+    NuagePoints.new xs, ys
+  end
+end
+
+

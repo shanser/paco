@@ -3,12 +3,14 @@ require 'test_helper'
 class TachesControllerTest < ActionController::TestCase
   test "should get index" do
     demarrage = date_reference
-    [2, 4].map{|i| Factory(:tache, :statut => 'OK', :date_sortie => demarrage + i.days)}
-    tache_non_finie = Factory(:tache)
+    Time.stubs(:now => demarrage + 4.days)
+
+    [2, 4].map{|i| Factory(:tache, :statut => 'OK', :date_sortie => demarrage + i.days, :date_entree => demarrage)}
+    tache_non_finie = Factory(:tache, :date_entree => demarrage + 4.days)
     get :index
     assert_response :success
     assert_not_nil assigns(:taches)
-    assert_equal "Paco prédit que le projet se finira le January 07, 2001 00:00", assigns(:prediction_date_fin)
+    assert_equal "Paco prédit que le projet se finira le 09 January 2001", assigns(:prediction_date_fin)
   end
 
   test "sait gérer le cas où il n'y a pas assez de tâches terminées pour prédire la fin du projet" do
