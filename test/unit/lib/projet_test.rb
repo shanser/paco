@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'Projet'
+require 'projet.rb'
 
 
 class ProjetTest < ActiveSupport::TestCase
