@@ -27,6 +27,15 @@ class ProjetTest < ActiveSupport::TestCase
       Projet.projection_date_fin
     end
   end
+  
+  test "génère une exception quand la projection est inférieure à la date du jour" do
+    bouchonne_taches_entrees [0, 1], [3, 3]
+    bouchonne_taches_sorties [0, 1], [1, 1]
+    
+    assert_raise Paco::ProjetInterminable do
+      Projet.projection_date_fin
+    end
+  end
 
   test "sait calculer date projection fin quand le backlog ne bouge pas" do
     bouchonne_taches_entrees jours_apres_demarrage = [0], nb_taches_a_ces_jours = [3]
@@ -54,9 +63,6 @@ class ProjetTest < ActiveSupport::TestCase
     assert_equal [2, 4, 6].map { |i|  (demarrage + i.days).to_i}, nuage.xs
     assert_equal [1, 2, 2], nuage.ys 
   end
-
-
-
 
   test "cumuls d'un singleton est ce singleton lui-même" do
     assert_equal [1], cumuls([1])

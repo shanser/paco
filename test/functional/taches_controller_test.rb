@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class TachesControllerTest < ActionController::TestCase
+  
   test "should get index" do
-    demarrage = date_reference
-    Time.stubs(:now => demarrage + 4.days)
+    bouchonne_le_temps
+    cree_taches_finies [0, 0], [2, 4]
+    cree_taches_non_finies [4]
 
-    [2, 4].map{|i| Factory(:tache, :statut => 'OK', :date_sortie => demarrage + i.days, :date_entree => demarrage)}
-    tache_non_finie = Factory(:tache, :date_entree => demarrage + 4.days)
     get :index
     assert_response :success
     assert_not_nil assigns(:taches)
@@ -17,6 +17,17 @@ class TachesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_equal 'Paco ne sait pas encore prédire la date de fin du projet', assigns(:prediction_date_fin)
+  end
+  
+  test "sait gérer le cas où il le projet est interminable à ce rythme" do
+    bouchonne_le_temps
+    cree_taches_finies [0, 0], [0, 1]
+    cree_taches_non_finies [0, 1, 1, 1]
+
+    get :index
+    assert_response :success
+    assert_equal "Paco prédit que le projet ne se terminera jamais à ce rythme", assigns(:prediction_date_fin)
+    
   end
 
   test "should get new" do
@@ -54,5 +65,21 @@ class TachesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to taches_path
+  end
+  
+  private
+  def cree_taches_finies dates_entree, dates_sortie
+    dates = dates_entree.zip(dates_sortie)
+    dates.map{|i| Factory(:tache, :statut => 'OK', :date_entree => demarrage + i.first.days, :date_sortie => demarrage + i.last.days)}
+  end
+  
+  def cree_taches_non_finies dates_entree
+    dates_entree.map{ |i| Factory(:tache, :date_entree => demarrage + i.days) }
+  end
+  
+  def bouchonne_le_temps
+    @demarrage = date_reference
+    self.class.send :attr_reader, :demarrage
+    Time.stubs(:now => demarrage + 4.days)
   end
 end

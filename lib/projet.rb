@@ -23,7 +23,9 @@ class Projet
     droite_entrees = nuage_points.regression_lineaire
     droite_sorties = nombre_taches_sorties_par_date.regression_lineaire
 
-    Time.at timestamp_projection(droite_entrees, droite_sorties)
+    date_projetee = Time.at timestamp_projection(droite_entrees, droite_sorties)
+    raise Paco::ProjetInterminable if date_projetee < Time.now
+    date_projetee
   end
 
   def self.nombre_taches_entrees_par_date
