@@ -47,6 +47,10 @@ before "deploy:update" do
   run "rake gems:install"
 end
 
+after 'deploy:finalize_update' do
+  run "cd #{release_path} && ln -s #{shared_path}/db/production.sqlite3 db/"
+end
+
 namespace :deploy do
   desc "Restart Application"
   task :restart do
