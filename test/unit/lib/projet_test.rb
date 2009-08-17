@@ -78,8 +78,8 @@ class ProjetTest < ActiveSupport::TestCase
   
   private
   def bouchonne_requete_taches resultat_requete, parametres
-    Tache.stubs(:count).
-          with(parametres).
+    Tache.stubs(:sum).
+          with(:poids, parametres).
           returns(resultat_requete)
   end
   def bouchonne_taches_entrees clefs, valeurs

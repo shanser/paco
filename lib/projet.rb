@@ -29,7 +29,7 @@ class Projet
   end
 
   def self.nombre_taches_entrees_par_date
-    points = nombre_taches_par_date({:group => :date_entree, :order => :date_entree})
+    nombre_taches_par_date({:group => :date_entree, :order => :date_entree})
   end
 
   def self.nombre_taches_sorties_par_date
@@ -42,7 +42,7 @@ class Projet
   end
   
   def self.nombre_taches_par_date parametres_requete
-    result = Tache.count(parametres_requete)
+    result = Tache.sum(:poids, parametres_requete)
     xs = result.keys.map{|t| t.to_i}
     ys = cumuls(result.values)
     

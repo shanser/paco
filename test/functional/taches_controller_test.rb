@@ -27,7 +27,17 @@ class TachesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_equal "Paco prédit que le projet ne se terminera jamais à ce rythme", assigns(:prediction_date_fin)
-    
+  end
+  
+  test "sait gérer la pondération" do
+    bouchonne_le_temps
+    cree_taches_finies [0, 0], [2, 4]
+    Factory :tache, :date_entree => demarrage + 4.days, :poids => 2
+
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:taches)
+    assert_equal "Paco prédit que le projet ne se terminera jamais à ce rythme", assigns(:prediction_date_fin)
   end
 
   test "should get new" do
