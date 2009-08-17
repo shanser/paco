@@ -2,10 +2,6 @@ require 'test_helper'
 
 class TacheTest < ActiveSupport::TestCase
 
-  test "fake test" do
-    assert false
-  end
-
   test "une tâche doit avoir un poids par défaut de 1" do
     assert_equal 1, Tache.new.poids
   end
