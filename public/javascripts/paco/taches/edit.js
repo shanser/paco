@@ -1,14 +1,6 @@
 function affichageConditionnel(target) {
 	target = $("#date_sortie")
-	afficheTargetSiTriggerNonBlanc($(this), target)
-}
-
-function afficheTargetSiTriggerNonBlanc(trigger, target) {
-	if (trigger.val() == '') {
-		target.hide();
-	} else {
-		target.show();
-	}	
+	$(this).val() == '' ? target.hide() : target.show()
 }
 
 $(document).ready(function() {
