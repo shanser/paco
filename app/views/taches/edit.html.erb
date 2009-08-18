@@ -1,3 +1,6 @@
+<% content_for :head do %>
+	<%= javascript_include_tag 'paco/taches/edit' %>
+<% end %>
 <h1>Editing tache</h1>
 
 <% form_for(@tache) do |f| %>
@@ -23,7 +26,7 @@
     <%= f.label :date_entree %><br />
     <%= f.date_select :date_entree %>
   </p>
-  <p>
+  <p id='date_sortie'>
     <%= f.label :date_sortie %><br />
     <%= f.date_select :date_sortie %>
   </p>
