@@ -10,7 +10,7 @@ class TachesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:taches)
-    assert_equal "Paco prédit que le projet se finira le 09 January 2001", assigns(:prediction_date_fin)
+    assert_equal "Paco prédit que le projet se finira le 09 janvier 2001", assigns(:prediction_date_fin)
   end
 
   test "sait gérer le cas où il n'y a pas assez de tâches terminées pour prédire la fin du projet" do

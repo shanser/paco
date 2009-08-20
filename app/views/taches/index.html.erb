@@ -20,8 +20,8 @@
     <td><%=h tache.commentaire %></td>
     <td><%=h tache.poids %></td>
     <td><%=h tache.statut %></td>
-    <td><%=h tache.date_entree %></td>
-    <td><%=h tache.date_sortie %></td>
+    <td><%=l tache.date_entree %></td>
+    <td><%=l tache.date_sortie if tache.date_sortie %></td>
     <td><%= link_to 'Show', tache %></td>
     <td><%= link_to 'Edit', edit_tache_path(tache) %></td>
     <td><%= link_to 'Destroy', tache, :confirm => 'Are you sure?', :method => :delete %></td>
