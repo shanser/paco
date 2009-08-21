@@ -11,15 +11,12 @@ class TachesControllerTest < ActionController::TestCase
     cree_taches_non_finies [4]
 
     get :index
-    assert_response :success
-    assert_not_nil assigns(:taches)
-    assert_equal "Paco prédit que le projet se finira le 09 janvier 2001", assigns(:prediction_date_fin)
+    assert_prediction_paco_equal "Paco prédit que le projet se finira le 09 janvier 2001"
   end
 
   test "sait gérer le cas où il n'y a pas assez de tâches terminées pour prédire la fin du projet" do
     get :index
-    assert_response :success
-    assert_equal 'Paco ne sait pas encore prédire la date de fin du projet', assigns(:prediction_date_fin)
+    assert_prediction_paco_equal 'Paco ne sait pas encore prédire la date de fin du projet'
   end
   
   test "sait gérer le cas où le projet est interminable à ce rythme" do
@@ -27,8 +24,7 @@ class TachesControllerTest < ActionController::TestCase
     cree_taches_non_finies [0, 1, 1, 1]
 
     get :index
-    assert_response :success
-    assert_equal "Paco prédit que le projet ne se terminera jamais à ce rythme", assigns(:prediction_date_fin)
+    assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
   end
   
   test "sait gérer la pondération" do
@@ -36,9 +32,7 @@ class TachesControllerTest < ActionController::TestCase
     Factory :tache, :date_entree => demarrage + 4.days, :poids => 2
 
     get :index
-    assert_response :success
-    assert_not_nil assigns(:taches)
-    assert_equal "Paco prédit que le projet ne se terminera jamais à ce rythme", assigns(:prediction_date_fin)
+    assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
   end
 
   test "should get new" do
@@ -92,5 +86,11 @@ class TachesControllerTest < ActionController::TestCase
     @demarrage = date_reference
     self.class.send :attr_reader, :demarrage
     Time.stubs(:now => demarrage + 4.days)
+  end
+  
+  def assert_prediction_paco_equal prediction
+    assert_response :success
+    assert_equal prediction, assigns(:prediction_date_fin)
+    assert_not_nil assigns(:taches)
   end
 end
