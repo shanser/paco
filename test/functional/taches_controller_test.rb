@@ -19,7 +19,7 @@ class TachesControllerTest < ActionController::TestCase
     assert_equal 'Paco ne sait pas encore prédire la date de fin du projet', assigns(:prediction_date_fin)
   end
   
-  test "sait gérer le cas où il le projet est interminable à ce rythme" do
+  test "sait gérer le cas où le projet est interminable à ce rythme" do
     bouchonne_le_temps
     cree_taches_finies [0, 0], [0, 1]
     cree_taches_non_finies [0, 1, 1, 1]
