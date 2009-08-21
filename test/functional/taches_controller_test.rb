@@ -2,8 +2,11 @@ require 'test_helper'
 
 class TachesControllerTest < ActionController::TestCase
   
-  test "should get index" do
+  def setup
     bouchonne_le_temps
+  end
+  
+  test "should get index" do
     cree_taches_finies [0, 0], [2, 4]
     cree_taches_non_finies [4]
 
@@ -20,7 +23,6 @@ class TachesControllerTest < ActionController::TestCase
   end
   
   test "sait gérer le cas où le projet est interminable à ce rythme" do
-    bouchonne_le_temps
     cree_taches_finies [0, 0], [0, 1]
     cree_taches_non_finies [0, 1, 1, 1]
 
@@ -30,7 +32,6 @@ class TachesControllerTest < ActionController::TestCase
   end
   
   test "sait gérer la pondération" do
-    bouchonne_le_temps
     cree_taches_finies [0, 0], [2, 4]
     Factory :tache, :date_entree => demarrage + 4.days, :poids => 2
 
