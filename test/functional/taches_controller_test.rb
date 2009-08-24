@@ -42,7 +42,7 @@ class TachesControllerTest < ActionController::TestCase
 
   test "should create tache" do
     assert_difference('Tache.count') do
-      post :create, :tache => { }
+      post :create, :tache => {:description => 'tache' }
     end
 
     assert_redirected_to tache_path(assigns(:tache))

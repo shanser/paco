@@ -1,0 +1,15 @@
+<% form_for(@etiquetage) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tache %><br />
+    <%= f.collection_select :tache_id, @taches, :id, :description %>
+  </p>
+  <p>
+    <%= f.label :tag %><br />
+    <%= f.collection_select :tag_id, @tags, :id, :description %>
+  </p>
+  <p>
+    <%= f.submit 'Sauver' %>
+  </p>
+<% end %>

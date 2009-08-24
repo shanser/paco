@@ -9,7 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090824181801) do
+ActiveRecord::Schema.define(:version => 20090824185248) do
+
+  create_table "etiquetages", :force => true do |t|
+    t.integer "tache_id"
+    t.integer "tag_id"
+  end
 
   create_table "taches", :force => true do |t|
     t.text    "description"

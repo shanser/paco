@@ -1,0 +1,22 @@
+<h1>Listing etiquetages</h1>
+
+<table>
+  <tr>
+    <th>Tache</th>
+    <th>Tag</th>
+  </tr>
+
+<% @etiquetages.each do |etiquetage| %>
+  <tr>
+    <td><%=h etiquetage.tache.description %></td>
+    <td><%=h etiquetage.tag.description %></td>
+    <td><%= link_to 'Show', etiquetage %></td>
+    <td><%= link_to 'Edit', edit_etiquetage_path(etiquetage) %></td>
+    <td><%= link_to 'Destroy', etiquetage, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New etiquetage', new_etiquetage_path %>

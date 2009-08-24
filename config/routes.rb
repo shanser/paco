@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :etiquetages
+
   map.resources :tags
 
   map.resources :taches
