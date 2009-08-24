@@ -25,9 +25,8 @@ class EtiquetagesController < ApplicationController
   # GET /etiquetages/new.xml
   def new
     @etiquetage = Etiquetage.new
-    @taches = Tache.all
-    @tags = Tag.all
-
+    setup_taches_and_tags
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @etiquetage }
@@ -37,8 +36,7 @@ class EtiquetagesController < ApplicationController
   # GET /etiquetages/1/edit
   def edit
     @etiquetage = Etiquetage.find(params[:id])
-    @taches = Tache.all
-    @tags = Tag.all
+    setup_taches_and_tags
   end
 
   # POST /etiquetages
