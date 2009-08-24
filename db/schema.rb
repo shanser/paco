@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090803151141) do
+ActiveRecord::Schema.define(:version => 20090824181801) do
 
   create_table "taches", :force => true do |t|
     t.text    "description"
@@ -18,6 +18,12 @@ ActiveRecord::Schema.define(:version => 20090803151141) do
     t.string  "statut"
     t.date    "date_entree"
     t.date    "date_sortie"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
