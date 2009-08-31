@@ -1,4 +1,7 @@
 class EtiquetagesController < ApplicationController
+  
+  before_filter :setup_taches_and_tags, :only => [:new, :edit]
+  
   # GET /etiquetages
   # GET /etiquetages.xml
   def index
@@ -25,7 +28,6 @@ class EtiquetagesController < ApplicationController
   # GET /etiquetages/new.xml
   def new
     @etiquetage = Etiquetage.new
-    setup_taches_and_tags
     
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +38,6 @@ class EtiquetagesController < ApplicationController
   # GET /etiquetages/1/edit
   def edit
     @etiquetage = Etiquetage.find(params[:id])
-    setup_taches_and_tags
   end
 
   # POST /etiquetages
