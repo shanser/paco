@@ -1,21 +1,16 @@
 <h1>Listing etiquetages</h1>
 
-<table>
-  <tr>
-    <th>Tache</th>
-    <th>Tag</th>
-  </tr>
-
+<% tag_courant = nil %>
 <% @etiquetages.each do |etiquetage| %>
-  <tr>
-    <td><%=h etiquetage.tache.description %></td>
-    <td><%=h etiquetage.tag.description %></td>
-    <td><%= link_to 'Show', etiquetage %></td>
-    <td><%= link_to 'Edit', edit_etiquetage_path(etiquetage) %></td>
-    <td><%= link_to 'Destroy', etiquetage, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+	<%= "<h2>#{etiquetage.tag.description}</h2>" if tag_courant != etiquetage.tag %>
+	<dl>
+		<dt><%=h etiquetage.tache.description %></dt>
+    <dd><%= link_to 'Show', etiquetage %></dd>
+    <dd><%= link_to 'Edit', edit_etiquetage_path(etiquetage) %></dd>
+    <dd><%= link_to 'Destroy', etiquetage, :confirm => 'Are you sure?', :method => :delete %></dd>
+	</dl>
+	<% tag_courant = etiquetage.tag %>
 <% end %>
-</table>
 
 <br />
 
