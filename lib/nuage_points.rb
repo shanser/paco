@@ -26,7 +26,7 @@ class NuagePoints
   end
   
   def to_google_graph_data
-    xs_utiles = xs.map{|x| (x - timestamp_debut) / nombre_secondes_dans_un_jour}
+    xs_utiles = xs.map{|x| jours_depuis_debut_projet x}
     [xs_utiles, ys].map{|suite| suite.join(',')}
   end
   
@@ -35,7 +35,13 @@ class NuagePoints
   end
   
   def max_x
-    (xs.last - timestamp_debut) / nombre_secondes_dans_un_jour
+    jours_depuis_debut_projet xs.last
+  end
+  
+  private
+  
+  def jours_depuis_debut_projet valeur
+    (valeur - timestamp_debut) / nombre_secondes_dans_un_jour
   end
 end
 
