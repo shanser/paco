@@ -8,13 +8,13 @@ class TachesControllerTest < ActionController::TestCase
   
   test "should get index" do
     cree_taches_finies [0, 0], [2, 3]
-    cree_taches_non_finies [3]
+    cree_taches_non_finies [3, 3]
 
     get :index
-    assert_prediction_paco_equal "Paco prédit que le projet se finira le 05 janvier 2001"
-    assert_equal '0,3|2,3|2,3|1,2', assigns(:google_graph_data)
+    assert_prediction_paco_equal "Paco prédit que le projet se finira le 10 janvier 2001"
+    assert_equal '0,3|2,4|2,3|1,2', assigns(:google_graph_data)
     assert_equal 3, assigns(:google_graph_max_x)
-    
+    assert_equal 4, assigns(:google_graph_max_y)
   end
 
   test "sait gérer le cas où il n'y a pas assez de tâches terminées pour prédire la fin du projet" do

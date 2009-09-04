@@ -48,6 +48,10 @@ class Projet
     (last_x - timestamp_debut) / nombre_secondes_dans_un_jour
   end
   
+  def self.google_graph_max_y
+    nombre_taches_entrees_par_date.ys.last
+  end
+  
   def self.date_debut
     Time.at timestamp_debut
   end
