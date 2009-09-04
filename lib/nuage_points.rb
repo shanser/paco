@@ -1,8 +1,8 @@
 class NuagePoints
-  attr_reader :xs, :ys
+  attr_reader :xs, :ys, :timestamp_debut
   
-  def initialize xs, ys
-    @xs, @ys = xs, ys
+  def initialize xs, ys, timestamp_debut
+    @xs, @ys, @timestamp_debut= xs, ys, timestamp_debut
   end
   
   def size
@@ -23,10 +23,19 @@ class NuagePoints
     Droite.new ordonnee_origine_sorties, pente_sorties
   end
   
-  def to_google_graph_data timestamp_debut
+  def to_google_graph_data
     nombre_secondes_dans_un_jour = 86400
     xs_utiles = xs.map{|x| (x - timestamp_debut) / nombre_secondes_dans_un_jour}
     [xs_utiles, ys].map{|suite| suite.join(',')}
+  end
+  
+  def max_y
+    ys.last
+  end
+  
+  def max_x
+    nombre_secondes_dans_un_jour = 86400
+    (xs.last - timestamp_debut) / nombre_secondes_dans_un_jour
   end
 end
 

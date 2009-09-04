@@ -4,7 +4,7 @@ class TachesController < ApplicationController
   def index
     @taches = Tache.all
     begin
-      @google_graph_data = Projet.to_google_graph_data
+      @google_graph_data = Projet.google_graph_data
       @google_graph_max_x = Projet.google_graph_max_x
       @google_graph_max_y = Projet.google_graph_max_y
       prediction = Projet.projection_date_fin

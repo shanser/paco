@@ -36,24 +36,18 @@ class Projet
     nombre_taches_par_date({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
   end
   
-  def self.to_google_graph_data
+  def self.google_graph_data
     [nombre_taches_entrees_par_date, nombre_taches_sorties_par_date].map{ |nuage|
-      nuage.to_google_graph_data(timestamp_debut)
+      nuage.to_google_graph_data
     }.join('|')
   end
 
   def self.google_graph_max_x
-    last_x = nombre_taches_sorties_par_date.xs.last
-    nombre_secondes_dans_un_jour = 86400
-    (last_x - timestamp_debut) / nombre_secondes_dans_un_jour
+    nombre_taches_entrees_par_date.max_x
   end
   
   def self.google_graph_max_y
-    nombre_taches_entrees_par_date.ys.last
-  end
-  
-  def self.date_debut
-    Time.at timestamp_debut
+    nombre_taches_entrees_par_date.max_y
   end
   
   private
@@ -71,11 +65,12 @@ class Projet
       xs << aujourd_hui
       ys << ys.last
     end
-    NuagePoints.new xs, ys
+    NuagePoints.new xs, ys, timestamp_debut
   end
   
   def self.timestamp_debut
-    nombre_taches_entrees_par_date.first.x
+    date_minimum = Tache.minimum(:date_entree)
+    date_minimum.nil? ? 0 : date_minimum.to_date.to_i
   end
 end
 
