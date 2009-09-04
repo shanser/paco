@@ -18,25 +18,24 @@ end
 
 class Projet
 
-  def self.projection_date_fin
-    nuage_points = nuage_points_entrees
-    droite_entrees = nuage_points.regression_lineaire
-    droite_sorties = nuage_points_sorties.regression_lineaire
+  attr_reader :nuage_points_entrees, :nuage_points_sorties
 
-    date_projetee =  date_debut + timestamp_projection(droite_entrees, droite_sorties).days
+  def initialize
+    @nuage_points_entrees = nuage_points({:group => :date_entree, :order => :date_entree})
+    @nuage_points_sorties = nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
+  end
+
+  def projection_date_fin
+    droite_entrees = nuage_points_entrees.regression_lineaire
+    droite_sorties = nuage_points_sorties.regression_lineaire
+    abcisse_intersection = droite_entrees.abcisse_intersection_avec droite_sorties
+
+    date_projetee =  date_debut + abcisse_intersection.days
     raise Paco::ProjetInterminable if date_projetee < Time.now.to_date
     date_projetee
   end
 
-  def self.nuage_points_entrees
-    nuage_points({:group => :date_entree, :order => :date_entree})
-  end
-
-  def self.nuage_points_sorties
-    nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
-  end
-  
-  def self.google_graph
+  def google_graph
     retour = {}
     retour[:max_x] = nuage_points_entrees.max_x
     retour[:max_y] = nuage_points_entrees.max_y
@@ -45,11 +44,8 @@ class Projet
   end
   
   private
-  def self.timestamp_projection droite_entrees, droite_sorties
-    droite_entrees.abcisse_intersection_avec droite_sorties
-  end
-  
-  def self.nuage_points parametres_requete
+
+  def nuage_points parametres_requete
     result = Tache.sum(:poids, parametres_requete)
     xs = result.keys.map{|t| jours_depuis_debut_projet t.to_i}
     ys = cumuls(result.values)
@@ -62,16 +58,16 @@ class Projet
     NuagePoints.new xs, ys
   end
   
-  def self.date_debut
+  def date_debut
     Tache.minimum(:date_entree)
   end
   
-  def self.timestamp_debut
+  def timestamp_debut
     date_minimum = date_debut
     date_minimum.nil? ? 0 : date_minimum.to_date.to_i
   end
   
-  def self.jours_depuis_debut_projet valeur
+  def jours_depuis_debut_projet valeur
     (valeur - timestamp_debut) / 86400
   end
 end

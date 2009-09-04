@@ -16,7 +16,7 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_sorties [], []
     
     assert_raise Paco::CalculProjectionImpossible do
-      Projet.projection_date_fin
+      projet.projection_date_fin
     end
   end
   
@@ -25,7 +25,7 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_sorties [2], [1]
     
     assert_raise Paco::CalculProjectionImpossible do
-      Projet.projection_date_fin
+      projet.projection_date_fin
     end
   end
   
@@ -34,7 +34,7 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_sorties [0, 1], [1, 1]
     
     assert_raise Paco::ProjetInterminable do
-      Projet.projection_date_fin
+      projet.projection_date_fin
     end
   end
 
@@ -43,7 +43,7 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_sorties [2, 4], [1, 1]
     date_attendue = demarrage + 6.days
 
-    assert_equal date_attendue, Projet.projection_date_fin
+    assert_equal date_attendue, projet.projection_date_fin
   end
 
   test "sait calculer date projection fin quand le backlog évolue" do
@@ -51,15 +51,16 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_sorties [2, 4], [1, 1]
     date_attendue = demarrage + 8.days
 
-    assert_equal date_attendue, Projet.projection_date_fin
+    assert_equal date_attendue, projet.projection_date_fin
   end
   
   test "nombre_taches_par_date rajoute un point au nuage si la dernière date retournée n'est pas aujourd'hui" do
     Time.stubs(:now => demarrage + 6.days)
 
+    bouchonne_taches_entrees [], []
     bouchonne_taches_sorties [2, 4], [1, 1]
 
-    nuage = Projet.nuage_points_sorties
+    nuage = projet.nuage_points_sorties
     assert_equal 3, nuage.size
     assert_equal [2, 4, 6], nuage.xs
     assert_equal [1, 2, 2], nuage.ys 
@@ -69,7 +70,7 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_entrees [0, 4], [2, 1]
     bouchonne_taches_sorties [2, 4], [1, 1]
     
-    assert_equal '0,4|2,3|2,4|1,2', Projet.google_graph[:data]
+    assert_equal '0,4|2,3|2,4|1,2', projet.google_graph[:data]
   end
 
   test "cumuls d'un singleton est ce singleton lui-même" do
@@ -90,17 +91,21 @@ class ProjetTest < ActiveSupport::TestCase
           with(:poids, parametres).
           returns(resultat_requete)
   end
+
   def bouchonne_taches_entrees clefs, valeurs
     bouchonne_requete_taches (faux_resultat clefs, valeurs), {:order => :date_entree, :group => :date_entree}
   end
   
   def bouchonne_taches_sorties clefs, valeurs
     bouchonne_requete_taches (faux_resultat clefs, valeurs), {:order => :date_sortie, :group => :date_sortie, :conditions => "date_sortie IS NOT NULL"}
-    
   end
   
   def faux_resultat clefs, valeurs
     dates = clefs.map { |clef| demarrage + clef.days}
     stub(:keys => dates, :values => valeurs)
+  end
+  
+  def projet
+    Projet.new
   end
 end
