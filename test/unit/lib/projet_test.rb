@@ -59,7 +59,7 @@ class ProjetTest < ActiveSupport::TestCase
 
     bouchonne_taches_sorties [2, 4], [1, 1]
 
-    nuage = Projet.nombre_taches_sorties_par_date
+    nuage = Projet.nuage_de_points_sorties
     assert_equal 3, nuage.size
     assert_equal [2, 4, 6].map { |i|  (demarrage + i.days).to_i}, nuage.xs
     assert_equal [1, 2, 2], nuage.ys 
@@ -69,7 +69,7 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_entrees [0, 4], [2, 1]
     bouchonne_taches_sorties [2, 4], [1, 1]
     
-    assert_equal '0,4|2,3|2,4|1,2', Projet.google_graph_data
+    assert_equal '0,4|2,3|2,4|1,2', Projet.google_graph[:data]
   end
 
   test "cumuls d'un singleton est ce singleton lui-même" do

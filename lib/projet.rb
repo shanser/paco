@@ -19,28 +19,28 @@ end
 class Projet
 
   def self.projection_date_fin
-    nuage_points = nombre_taches_entrees_par_date
+    nuage_points = nuage_de_points_entrees
     droite_entrees = nuage_points.regression_lineaire
-    droite_sorties = nombre_taches_sorties_par_date.regression_lineaire
+    droite_sorties = nuage_de_points_sorties.regression_lineaire
 
     date_projetee = Time.at timestamp_projection(droite_entrees, droite_sorties)
     raise Paco::ProjetInterminable if date_projetee < Time.now
     date_projetee
   end
 
-  def self.nombre_taches_entrees_par_date
-    nombre_taches_par_date({:group => :date_entree, :order => :date_entree})
+  def self.nuage_de_points_entrees
+    nuage_de_points({:group => :date_entree, :order => :date_entree})
   end
 
-  def self.nombre_taches_sorties_par_date
-    nombre_taches_par_date({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
+  def self.nuage_de_points_sorties
+    nuage_de_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
   end
   
   def self.google_graph
     retour = {}
-    retour[:max_x] = nombre_taches_entrees_par_date.max_x
-    retour[:max_y] = nombre_taches_entrees_par_date.max_y
-    retour[:data] = [nombre_taches_entrees_par_date, nombre_taches_sorties_par_date].map(&:to_google_graph_data).join('|')
+    retour[:max_x] = nuage_de_points_entrees.max_x
+    retour[:max_y] = nuage_de_points_entrees.max_y
+    retour[:data] = [nuage_de_points_entrees, nuage_de_points_sorties].map(&:to_google_graph_data).join('|')
     retour
   end
   
@@ -49,7 +49,7 @@ class Projet
     droite_entrees.abcisse_intersection_avec droite_sorties
   end
   
-  def self.nombre_taches_par_date parametres_requete
+  def self.nuage_de_points parametres_requete
     result = Tache.sum(:poids, parametres_requete)
     xs = result.keys.map{|t| t.to_i}
     ys = cumuls(result.values)
