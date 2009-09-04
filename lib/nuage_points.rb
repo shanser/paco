@@ -22,6 +22,12 @@ class NuagePoints
     ordonnee_origine_sorties, pente_sorties = lineFit.coefficients
     Droite.new ordonnee_origine_sorties, pente_sorties
   end
+  
+  def to_google_graph_data timestamp_debut
+    nombre_secondes_dans_un_jour = 86400
+    xs_utiles = xs.map{|x| (x - timestamp_debut) / nombre_secondes_dans_un_jour}
+    [xs_utiles, ys].map{|suite| suite.join(',')}
+  end
 end
 
 

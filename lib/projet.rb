@@ -35,6 +35,16 @@ class Projet
   def self.nombre_taches_sorties_par_date
     nombre_taches_par_date({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
   end
+  
+  def self.to_google_graph_data
+    [nombre_taches_entrees_par_date, nombre_taches_sorties_par_date].map{ |nuage|
+      nuage.to_google_graph_data(timestamp_debut)
+    }.join('|')
+  end
+  
+  def self.date_debut
+    Time.at timestamp_debut
+  end
 
   private
   def self.timestamp_projection droite_entrees, droite_sorties
@@ -52,6 +62,10 @@ class Projet
       ys << ys.last
     end
     NuagePoints.new xs, ys
+  end
+  
+  def self.timestamp_debut
+    nombre_taches_entrees_par_date.first.x
   end
 end
 

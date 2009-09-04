@@ -64,6 +64,18 @@ class ProjetTest < ActiveSupport::TestCase
     assert_equal [1, 2, 2], nuage.ys 
   end
 
+  test "sait renvoyer la date de début de projet" do
+    bouchonne_taches_entrees [0, 1], [3, 3]
+    assert_equal demarrage, Projet.date_debut
+  end
+
+  test "sait renvoyer les donnees au format google graph" do
+    bouchonne_taches_entrees [0, 4], [2, 1]
+    bouchonne_taches_sorties [2, 4], [1, 1]
+    
+    assert_equal '0,4|2,3|2,4|1,2', Projet.to_google_graph_data
+  end
+
   test "cumuls d'un singleton est ce singleton lui-même" do
     assert_equal [1], cumuls([1])
   end
