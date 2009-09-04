@@ -41,11 +41,17 @@ class Projet
       nuage.to_google_graph_data(timestamp_debut)
     }.join('|')
   end
+
+  def self.google_graph_max_x
+    last_x = nombre_taches_sorties_par_date.xs.last
+    nombre_secondes_dans_un_jour = 86400
+    (last_x - timestamp_debut) / nombre_secondes_dans_un_jour
+  end
   
   def self.date_debut
     Time.at timestamp_debut
   end
-
+  
   private
   def self.timestamp_projection droite_entrees, droite_sorties
     droite_entrees.abcisse_intersection_avec droite_sorties

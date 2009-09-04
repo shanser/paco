@@ -1,9 +1,9 @@
-<h1>Listing taches</h1>
-
 <h2><%= @prediction_date_fin %></h2>
 
-<%= image_tag "http://chart.apis.google.com/chart?chs=520x200&cht=lxy&chd=t:0,10|0,0|#{@google_graph_data}&chxt=x,y&chds=0,10,0,20,0,10,0,20,0,10,0,20&chxp=0,0,10,30,40,80,100&chxr=1,0,20,5&chm=b,CCCCEE,0,1,0|b,EECCCC,1,2,0" %>
+<h3>Graphe de progression</h3>
+<%= image_tag "http://chart.apis.google.com/chart?chs=520x200&cht=lxy&chd=t:0,#{@google_graph_max_x}|0,0|#{@google_graph_data}&chxt=x,y&chds=0,#{@google_graph_max_x},0,20,0,#{@google_graph_max_x},0,20,0,#{@google_graph_max_x},0,20&chxr=0,0,#{@google_graph_max_x},5|1,0,20,5&chm=b,CCCCEE,0,1,0|b,EECCCC,1,2,0" %>
 
+<h3>Listing taches</h3>
 <table>
   <tr>
     <th>Id</th>

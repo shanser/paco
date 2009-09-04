@@ -13,6 +13,7 @@ class TachesControllerTest < ActionController::TestCase
     get :index
     assert_prediction_paco_equal "Paco prédit que le projet se finira le 05 janvier 2001"
     assert_equal '0,3|2,3|2,3|1,2', assigns(:google_graph_data)
+    assert_equal 3, assigns(:google_graph_max_x)
     
   end
 
