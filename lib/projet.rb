@@ -37,9 +37,7 @@ class Projet
   end
   
   def self.google_graph_data
-    [nombre_taches_entrees_par_date, nombre_taches_sorties_par_date].map{ |nuage|
-      nuage.to_google_graph_data
-    }.join('|')
+    [nombre_taches_entrees_par_date, nombre_taches_sorties_par_date].map(&:to_google_graph_data).join('|')
   end
 
   def self.google_graph_max_x
