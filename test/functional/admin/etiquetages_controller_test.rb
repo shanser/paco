@@ -5,7 +5,7 @@ class Admin::EtiquetagesControllerTest < ActionController::TestCase
     Factory :etiquetage
     get :index
     assert_response :success
-    assert_layout 'admin'
+    assert_admin
   end
   
   test "should get new" do

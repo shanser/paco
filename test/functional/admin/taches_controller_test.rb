@@ -4,8 +4,7 @@ class Admin::TachesControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_layout 'admin'
-    assert_not_nil assigns(:mode_admin)
+    assert_admin
   end
   
   test "should get new" do

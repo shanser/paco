@@ -1,6 +1,7 @@
 class Admin::EtiquetagesController < EtiquetagesController
   layout 'admin'
   before_filter :setup_taches_and_tags, :only => [:new, :edit]
+  before_filter :set_admin
   
   # GET /etiquetages/1
   # GET /etiquetages/1.xml
@@ -74,6 +75,8 @@ class Admin::EtiquetagesController < EtiquetagesController
       format.xml  { head :ok }
     end
   end
+
+  protected
   
   def setup_taches_and_tags
     @taches = Tache.all

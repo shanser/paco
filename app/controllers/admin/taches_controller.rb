@@ -74,11 +74,4 @@ class Admin::TachesController < TachesController
       format.xml  { head :ok }
     end
   end
-  
-  protected
-  
-  def set_admin
-    @mode_admin = true
-    
-  end
 end

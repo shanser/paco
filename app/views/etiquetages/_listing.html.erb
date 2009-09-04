@@ -1,0 +1,11 @@
+<% tag_courant = nil %>
+<% @etiquetages.each do |etiquetage| %>
+	<%= "<h2>#{etiquetage.tag.description}</h2>" if tag_courant != etiquetage.tag %>
+	<dl>
+		<dt><%=h etiquetage.tache.description %></dt>
+    <dd><%= link_to 'Show', [:admin, etiquetage] if mode_admin? %></dd>
+    <dd><%= link_to 'Edit', edit_admin_etiquetage_path(etiquetage) if mode_admin? %></dd>
+    <dd><%= link_to 'Destroy', [:admin, etiquetage], :confirm => 'Are you sure?', :method => :delete if mode_admin? %></dd>
+	</dl>
+	<% tag_courant = etiquetage.tag %>
+<% end %>

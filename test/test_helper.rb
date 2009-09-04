@@ -43,4 +43,9 @@ class ActiveSupport::TestCase
   def assert_layout(layout)
     assert_equal "layouts/#{layout}", @response.layout
   end
+  
+  def assert_admin
+    assert_layout('admin')
+    assert_not_nil assigns(:mode_admin)
+  end
 end
