@@ -4,9 +4,7 @@ class TachesController < ApplicationController
   def index
     @taches = Tache.all
     begin
-      @google_graph_data = Projet.google_graph_data
-      @google_graph_max_x = Projet.google_graph_max_x
-      @google_graph_max_y = Projet.google_graph_max_y
+      @google_graph = Projet.google_graph
       prediction = Projet.projection_date_fin
       @prediction_date_fin = "Paco prédit que le projet se finira le #{I18n.l prediction, :format => :date}"
     rescue Paco::CalculProjectionImpossible

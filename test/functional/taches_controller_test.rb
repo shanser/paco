@@ -12,9 +12,8 @@ class TachesControllerTest < ActionController::TestCase
 
     get :index
     assert_prediction_paco_equal "Paco prédit que le projet se finira le 10 janvier 2001"
-    assert_equal '0,3|2,4|2,3|1,2', assigns(:google_graph_data)
-    assert_equal 3, assigns(:google_graph_max_x)
-    assert_equal 4, assigns(:google_graph_max_y)
+    gg = assigns(:google_graph)
+    assert_equal [3, 4, '0,3|2,4|2,3|1,2'], [gg[:max_x], gg[:max_y], gg[:data]] 
   end
 
   test "sait gérer le cas où il n'y a pas assez de tâches terminées pour prédire la fin du projet" do

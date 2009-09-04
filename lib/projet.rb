@@ -36,16 +36,12 @@ class Projet
     nombre_taches_par_date({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
   end
   
-  def self.google_graph_data
-    [nombre_taches_entrees_par_date, nombre_taches_sorties_par_date].map(&:to_google_graph_data).join('|')
-  end
-
-  def self.google_graph_max_x
-    nombre_taches_entrees_par_date.max_x
-  end
-  
-  def self.google_graph_max_y
-    nombre_taches_entrees_par_date.max_y
+  def self.google_graph
+    retour = {}
+    retour[:max_x] = nombre_taches_entrees_par_date.max_x
+    retour[:max_y] = nombre_taches_entrees_par_date.max_y
+    retour[:data] = [nombre_taches_entrees_par_date, nombre_taches_sorties_par_date].map(&:to_google_graph_data).join('|')
+    retour
   end
   
   private
