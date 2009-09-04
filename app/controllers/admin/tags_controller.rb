@@ -1,4 +1,6 @@
-class TagsController < ApplicationController
+class Admin::TagsController < ApplicationController
+  layout 'admin'
+
   # GET /tags
   # GET /tags.xml
   def index
@@ -45,7 +47,7 @@ class TagsController < ApplicationController
     respond_to do |format|
       if @tag.save
         flash[:notice] = 'Tag was successfully created.'
-        format.html { redirect_to(@tag) }
+        format.html { redirect_to([:admin, @tag]) }
         format.xml  { render :xml => @tag, :status => :created, :location => @tag }
       else
         format.html { render :action => "new" }
@@ -62,7 +64,7 @@ class TagsController < ApplicationController
     respond_to do |format|
       if @tag.update_attributes(params[:tag])
         flash[:notice] = 'Tag was successfully updated.'
-        format.html { redirect_to(@tag) }
+        format.html { redirect_to([:admin, @tag]) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -78,7 +80,7 @@ class TagsController < ApplicationController
     @tag.destroy
 
     respond_to do |format|
-      format.html { redirect_to(tags_url) }
+      format.html { redirect_to(admin_tags_url) }
       format.xml  { head :ok }
     end
   end

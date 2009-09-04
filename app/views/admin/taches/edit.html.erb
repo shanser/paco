@@ -3,7 +3,7 @@
 <% end %>
 <h1>Editing tache</h1>
 
-<% form_for(@tache) do |f| %>
+<% form_for([:admin, @tache]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -35,5 +35,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @tache %> |
-<%= link_to 'Back', taches_path %>
+<%= link_to 'Show', [:admin, @tache] %> |
+<%= link_to 'Back', admin_taches_path %>

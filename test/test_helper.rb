@@ -39,4 +39,8 @@ class ActiveSupport::TestCase
   def date_reference
     Time.local(2001,1,1)
   end
+  
+  def assert_layout(layout)
+    assert_equal "layouts/#{layout}", @response.layout
+  end
 end

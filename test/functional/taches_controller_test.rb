@@ -38,43 +38,6 @@ class TachesControllerTest < ActionController::TestCase
     assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create tache" do
-    assert_difference('Tache.count') do
-      post :create, :tache => {:description => 'tache' }
-    end
-
-    assert_redirected_to tache_path(assigns(:tache))
-  end
-
-  test "should show tache" do
-    get :show, :id => Factory(:tache)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => Factory(:tache)
-    assert_response :success
-  end
-
-  test "should update tache" do
-    put :update, :id => Factory(:tache), :tache => { }
-    assert_redirected_to tache_path(assigns(:tache))
-  end
-
-  test "should destroy tache" do
-    tache = Factory(:tache)
-    assert_difference('Tache.count', -1) do
-      delete :destroy, :id => tache
-    end
-
-    assert_redirected_to taches_path
-  end
-  
   private
   def cree_taches_finies dates_entree, dates_sortie
     dates = dates_entree.zip(dates_sortie)

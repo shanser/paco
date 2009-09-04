@@ -1,9 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :etiquetages
-
-  map.resources :tags
-
-  map.resources :taches
+  map.resources :etiquetages, :only => :index
+  map.resources :taches, :only => :index
+  
+  map.namespace :admin do |admin|
+    admin.resources :etiquetages
+    admin.resources :tags
+    admin.resources :taches
+  end
+  
+  map.admin '/admin', :controller => 'admin/taches', :action => 'index'
 
   # The priority is based upon order of creation: first created -> highest priority.
 

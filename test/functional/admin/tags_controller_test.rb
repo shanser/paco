@@ -1,10 +1,11 @@
 require 'test_helper'
 
-class TagsControllerTest < ActionController::TestCase
+class Admin::TagsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:tags)
+    assert_layout 'admin'
   end
 
   test "should get new" do
@@ -17,7 +18,7 @@ class TagsControllerTest < ActionController::TestCase
       post :create, :tag => {:description => 'tag' }
     end
 
-    assert_redirected_to tag_path(assigns(:tag))
+    assert_redirected_to admin_tag_path(assigns(:tag))
   end
 
   test "should show tag" do
@@ -32,7 +33,7 @@ class TagsControllerTest < ActionController::TestCase
 
   test "should update tag" do
     put :update, :id => Factory(:tag), :tag => { }
-    assert_redirected_to tag_path(assigns(:tag))
+    assert_redirected_to admin_tag_path(assigns(:tag))
   end
 
   test "should destroy tag" do
@@ -41,6 +42,6 @@ class TagsControllerTest < ActionController::TestCase
       delete :destroy, :id => tag
     end
 
-    assert_redirected_to tags_path
+    assert_redirected_to admin_tags_path
   end
 end

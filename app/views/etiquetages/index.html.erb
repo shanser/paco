@@ -5,13 +5,6 @@
 	<%= "<h2>#{etiquetage.tag.description}</h2>" if tag_courant != etiquetage.tag %>
 	<dl>
 		<dt><%=h etiquetage.tache.description %></dt>
-    <dd><%= link_to 'Show', etiquetage %></dd>
-    <dd><%= link_to 'Edit', edit_etiquetage_path(etiquetage) %></dd>
-    <dd><%= link_to 'Destroy', etiquetage, :confirm => 'Are you sure?', :method => :delete %></dd>
 	</dl>
 	<% tag_courant = etiquetage.tag %>
 <% end %>
-
-<br />
-
-<%= link_to 'New etiquetage', new_etiquetage_path %>
