@@ -1,5 +1,6 @@
 class Admin::TachesController < TachesController
   layout 'admin'
+  before_filter :set_admin
   
   # GET /taches/1
   # GET /taches/1.xml
@@ -72,5 +73,12 @@ class Admin::TachesController < TachesController
       format.html { redirect_to(admin_taches_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  protected
+  
+  def set_admin
+    @mode_admin = true
+    
   end
 end

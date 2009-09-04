@@ -3,27 +3,6 @@
 <h3>Graphe de progression</h3>
 <%= image_tag "http://chart.apis.google.com/chart?chs=520x200&cht=lxy&chd=t:0,#{@google_graph_max_x}|0,0|#{@google_graph_data}&chxt=x,y&chds=0,#{@google_graph_max_x},0,#{@google_graph_max_y},0,#{@google_graph_max_x},0,#{@google_graph_max_y},0,#{@google_graph_max_x},0,#{@google_graph_max_y}&chxr=0,0,#{@google_graph_max_x},5|1,0,#{@google_graph_max_y},5&chm=b,CCCCEE,0,1,0|b,EECCCC,1,2,0" %>
 
-<h3>Listing taches</h3>
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Description</th>
-    <th>Commentaire</th>
-    <th>Poids</th>
-    <th>Statut</th>
-    <th>Date entree</th>
-    <th>Date sortie</th>
-  </tr>
-
-<% @taches.each do |tache| %>
-  <tr>
-    <td><%=h tache.id %></td>
-    <td><%=h tache.description %></td>
-    <td><%=h tache.commentaire %></td>
-    <td><%=h tache.poids %></td>
-    <td><%=h tache.statut %></td>
-    <td><%=l tache.date_entree %></td>
-    <td><%=l tache.date_sortie if tache.date_sortie %></td>
-  </tr>
-<% end %>
+<h3>Backlog</h3>
+<%= render :partial => "listing" %>
 </table>

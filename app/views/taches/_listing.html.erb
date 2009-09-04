@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Date entrée</th>
+    <th>Description</th>
+    <th>Statut</th>
+    <th>Date sortie</th>
+    <th>Poids</th>
+    <th>Commentaire</th>
+  </tr>
+
+<% @taches.each do |tache| %>
+  <tr>
+    <td><%=h tache.id %></td>
+    <td><%=l tache.date_entree %></td>
+    <td><%=h tache.description %></td>
+    <td><%=h tache.statut %></td>
+    <td><%=l tache.date_sortie if tache.date_sortie %></td>
+    <td><%=h tache.poids %></td>
+    <td><%=h tache.commentaire %></td>
+    <td><%= link_to 'Show', [:admin, tache] if mode_admin? %></td>
+    <td><%= link_to 'Edit', edit_admin_tache_path(tache) if mode_admin? %></td>
+    <td><%= link_to 'Destroy', [:admin, tache], :confirm => 'Are you sure?', :method => :delete if mode_admin? %></td>
+  </tr>
+<% end %>
