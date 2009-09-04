@@ -61,7 +61,7 @@ class ProjetTest < ActiveSupport::TestCase
 
     nuage = Projet.nuage_points_sorties
     assert_equal 3, nuage.size
-    assert_equal [2, 4, 6].map { |i|  (demarrage + i.days).to_i}, nuage.xs
+    assert_equal [2, 4, 6], nuage.xs
     assert_equal [1, 2, 2], nuage.ys 
   end
 

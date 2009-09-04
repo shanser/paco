@@ -23,8 +23,8 @@ class Projet
     droite_entrees = nuage_points.regression_lineaire
     droite_sorties = nuage_points_sorties.regression_lineaire
 
-    date_projetee = Time.at timestamp_projection(droite_entrees, droite_sorties)
-    raise Paco::ProjetInterminable if date_projetee < Time.now
+    date_projetee =  date_debut + timestamp_projection(droite_entrees, droite_sorties).days
+    raise Paco::ProjetInterminable if date_projetee < Time.now.to_date
     date_projetee
   end
 
@@ -51,20 +51,28 @@ class Projet
   
   def self.nuage_points parametres_requete
     result = Tache.sum(:poids, parametres_requete)
-    xs = result.keys.map{|t| t.to_i}
+    xs = result.keys.map{|t| jours_depuis_debut_projet t.to_i}
     ys = cumuls(result.values)
     
-    aujourd_hui = Time.now.to_date.to_i
+    aujourd_hui = jours_depuis_debut_projet(Time.now.to_date.to_i)
     if xs.last != aujourd_hui
       xs << aujourd_hui
       ys << ys.last
     end
-    NuagePoints.new xs, ys, timestamp_debut
+    NuagePoints.new xs, ys
+  end
+  
+  def self.date_debut
+    Tache.minimum(:date_entree)
   end
   
   def self.timestamp_debut
-    date_minimum = Tache.minimum(:date_entree)
+    date_minimum = date_debut
     date_minimum.nil? ? 0 : date_minimum.to_date.to_i
+  end
+  
+  def self.jours_depuis_debut_projet valeur
+    (valeur - timestamp_debut) / 86400
   end
 end
 
