@@ -15,11 +15,6 @@ class TachesControllerTest < ActionController::TestCase
     gg = assigns(:google_graph)
     assert_equal [3, 4, '0,3|2,4|2,3|1,2'], [gg[:max_x], gg[:max_y], gg[:data]] 
   end
-
-  test "sait gérer le cas où il n'y a pas assez de tâches terminées pour prédire la fin du projet" do
-    get :index
-    assert_prediction_paco_equal 'Paco ne sait pas encore prédire la date de fin du projet'
-  end
   
   test "sait gérer le cas où le projet est interminable à ce rythme" do
     cree_taches_finies [0, 0], [0, 1]
@@ -35,6 +30,13 @@ class TachesControllerTest < ActionController::TestCase
 
     get :index
     assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
+  end
+  
+  test "sait gérer les projets terminés" do
+     cree_taches_finies [0, 0], [0, 1]
+     
+     get :index
+     assert_prediction_paco_equal 'Paco constate que le projet est terminé'
   end
 
   private

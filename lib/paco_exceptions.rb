@@ -4,4 +4,7 @@ module Paco
   
   class ProjetInterminable < Exception
   end
+  
+  class ProjetTermine < Exception
+  end
 end

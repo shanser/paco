@@ -26,6 +26,7 @@ class Projet
   end
 
   def projection_date_fin
+    raise Paco::ProjetTermine if termine?
     droite_entrees = nuage_points_entrees.regression_lineaire
     droite_sorties = nuage_points_sorties.regression_lineaire
     abcisse_intersection = droite_entrees.abcisse_intersection_avec droite_sorties
@@ -69,6 +70,10 @@ class Projet
   
   def jours_depuis_debut_projet valeur
     (valeur - timestamp_debut) / 86400
+  end
+  
+  def termine?
+    Tache.all.all? {|tache| tache.terminee?}
   end
 end
 

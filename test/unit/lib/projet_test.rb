@@ -9,6 +9,7 @@ class ProjetTest < ActiveSupport::TestCase
     @demarrage = date_reference
     Time.stubs(:now => demarrage + 4.days)
     Tache.stubs(:minimum => @demarrage)
+    Tache.stubs(:all => [stub(:terminee? => false)])
   end
 
   test "génère une exception quand il n'y a aucune tâche terminée" do
