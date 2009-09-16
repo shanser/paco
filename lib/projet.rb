@@ -25,14 +25,18 @@ class Projet
     @nuage_points_sorties = nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
   end
 
-  def projection_date_fin
-    raise Paco::ProjetTermine if termine?
-    droite_entrees = nuage_points_entrees.regression_lineaire
-    droite_sorties = nuage_points_sorties.regression_lineaire
-    abcisse_intersection = droite_entrees.abcisse_intersection_avec droite_sorties
+  def prediction_date_fin
+    return :projet_termine if termine?
+    begin
+      droite_entrees = nuage_points_entrees.regression_lineaire
+      droite_sorties = nuage_points_sorties.regression_lineaire
+      abcisse_intersection = droite_entrees.abcisse_intersection_avec droite_sorties
+    rescue Paco::CalculProjectionImpossible
+      return :projection_impossible
+    end
 
     date_projetee =  date_debut + abcisse_intersection.days
-    raise Paco::ProjetInterminable if date_projetee < Time.now.to_date
+    return :projet_interminable if date_projetee < Time.now.to_date
     date_projetee
   end
 
