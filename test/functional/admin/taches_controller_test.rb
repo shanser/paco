@@ -2,6 +2,7 @@ require 'test_helper'
 
 class Admin::TachesControllerTest < ActionController::TestCase
   test "should get index" do
+    Projet.create
     get :index
     assert_response :success
     assert_admin

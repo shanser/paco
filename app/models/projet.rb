@@ -1,30 +1,14 @@
-def cumuls valeurs
-  resultat =[]
-
-  valeurs.inject(0) do |cumul, valeur|
-    cumul += valeur
-    resultat << cumul
-    cumul
+class Projet < ActiveRecord::Base
+  has_many :taches
+ 
+  def nuage_points_entrees
+    nuage_points({:group => :date_entree, :order => :date_entree})
   end
-
-  resultat
-end
-
-class Date
-  def to_i
-    to_time.to_i
+  
+  def nuage_points_sorties
+    nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
   end
-end
-
-class Projet
-
-  attr_reader :nuage_points_entrees, :nuage_points_sorties
-
-  def initialize
-    @nuage_points_entrees = nuage_points({:group => :date_entree, :order => :date_entree})
-    @nuage_points_sorties = nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
-  end
-
+ 
   def prediction_date_fin
     return :projet_termine if termine?
     begin
@@ -34,12 +18,12 @@ class Projet
     rescue Paco::CalculProjectionImpossible
       return :projection_impossible
     end
-
+ 
     date_projetee =  date_debut + abcisse_intersection.days
     return :projet_interminable if date_projetee < Time.now.to_date
     date_projetee
   end
-
+ 
   def google_graph
     retour = {}
     retour[:max_x] = nuage_points_entrees.max_x
@@ -49,9 +33,9 @@ class Projet
   end
   
   private
-
+ 
   def nuage_points parametres_requete
-    result = Tache.sum(:poids, parametres_requete)
+    result = taches.sum(:poids, parametres_requete)
     xs = result.keys.map{|t| jours_depuis_debut_projet t.to_i}
     ys = cumuls(result.values)
     
@@ -64,7 +48,7 @@ class Projet
   end
   
   def date_debut
-    Tache.minimum(:date_entree)
+    taches.minimum(:date_entree)
   end
   
   def timestamp_debut
@@ -77,8 +61,24 @@ class Projet
   end
   
   def termine?
-    Tache.all.all? {|tache| tache.terminee?}
+    taches.all? {|tache| tache.terminee?}
   end
 end
 
-
+def cumuls valeurs
+  resultat =[]
+ 
+  valeurs.inject(0) do |cumul, valeur|
+    cumul += valeur
+    resultat << cumul
+    cumul
+  end
+ 
+  resultat
+end
+ 
+class Date
+  def to_i
+    to_time.to_i
+  end
+end

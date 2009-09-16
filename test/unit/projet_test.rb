@@ -1,12 +1,14 @@
 require 'test_helper'
-require 'projet.rb'
-
 
 class ProjetTest < ActiveSupport::TestCase
-  attr_reader :demarrage
+  attr_reader :demarrage, :projet
+  
+  should_have_many :taches
   
   def setup
+    @projet = Projet.new
     @demarrage = date_reference
+    @projet.stubs :taches => stub(:minimum => demarrage, :all? => false)
     Time.stubs(:now => demarrage + 4.days)
     Tache.stubs(:minimum => @demarrage)
     Tache.stubs(:all => [stub(:terminee? => false)])
@@ -82,7 +84,7 @@ class ProjetTest < ActiveSupport::TestCase
   
   private
   def bouchonne_requete_taches resultat_requete, parametres
-    Tache.stubs(:sum).
+    projet.taches.stubs(:sum).
           with(:poids, parametres).
           returns(resultat_requete)
   end
@@ -98,9 +100,5 @@ class ProjetTest < ActiveSupport::TestCase
   def faux_resultat clefs, valeurs
     dates = clefs.map { |clef| demarrage + clef.days}
     stub(:keys => dates, :values => valeurs)
-  end
-  
-  def projet
-    Projet.new
   end
 end

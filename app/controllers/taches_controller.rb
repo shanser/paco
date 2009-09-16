@@ -9,7 +9,7 @@ class TachesController < ApplicationController
   def index
     @taches = Tache.all
 
-    projet = Projet.new
+    projet = Projet.first
     @google_graph = projet.google_graph
     prediction = projet.prediction_date_fin
     correspondance = correspondances[prediction]

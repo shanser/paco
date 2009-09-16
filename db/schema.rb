@@ -9,11 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090824185248) do
+ActiveRecord::Schema.define(:version => 20090916163801) do
 
   create_table "etiquetages", :force => true do |t|
     t.integer "tache_id"
     t.integer "tag_id"
+  end
+
+  create_table "projets", :force => true do |t|
   end
 
   create_table "taches", :force => true do |t|
@@ -23,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20090824185248) do
     t.string  "statut"
     t.date    "date_entree"
     t.date    "date_sortie"
+    t.integer "projet_id"
   end
 
   create_table "tags", :force => true do |t|
