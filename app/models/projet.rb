@@ -44,6 +44,11 @@ class Projet < ActiveRecord::Base
     xs = result.keys.map{|t| jours_depuis_debut_projet t.to_i}
     ys = cumuls(result.values)
     
+    if xs.first != 0
+      xs = [0] + xs
+      ys = [0] + ys
+    end
+    
     aujourd_hui = jours_depuis_debut_projet(Time.now.to_date.to_i)
     if xs.last != aujourd_hui
       xs << aujourd_hui

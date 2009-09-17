@@ -22,10 +22,10 @@ class ProjetTest < ActiveSupport::TestCase
   end
   
   test "génère une exception quand le backlog se remplit aussi vite qu'il se vide" do
-    bouchonne_taches_entrees [0], [3]
+    bouchonne_taches_entrees [0, 2], [3, 4]
     bouchonne_taches_sorties [2], [1]
     
-    assert_equal :projection_impossible, projet.prediction_date_fin
+    assert_equal :projet_interminable, projet.prediction_date_fin
   end
   
   test "génère une exception quand la projection est inférieure à la date du jour" do
@@ -55,11 +55,11 @@ class ProjetTest < ActiveSupport::TestCase
     Time.stubs(:now => demarrage + 6.days)
 
     bouchonne_taches_entrees [], []
-    bouchonne_taches_sorties [2, 4], [1, 1]
+    bouchonne_taches_sorties [0, 4], [1, 1]
 
     nuage = projet.nuage_points_sorties
     assert_equal 3, nuage.size
-    assert_equal [2, 4, 6], nuage.xs
+    assert_equal [0, 4, 6], nuage.xs
     assert_equal [1, 2, 2], nuage.ys 
   end
 
@@ -67,7 +67,7 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_entrees [0, 4], [2, 1]
     bouchonne_taches_sorties [2, 4], [1, 1]
     
-    assert_equal '0,4|2,3|2,4|1,2', projet.google_graph[:data]
+    assert_equal '0,4|2,3|0,2,4|0,1,2', projet.google_graph[:data]
   end
 
   test "cumuls d'un singleton est ce singleton lui-même" do

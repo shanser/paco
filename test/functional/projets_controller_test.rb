@@ -10,13 +10,13 @@ class ProjetsControllerTest < ActionController::TestCase
   end
   
   test "should get show" do
-    cree_taches_finies [0, 0], [2, 3]
-    cree_taches_non_finies [3, 3]
+    cree_taches_finies [0, 0], [1, 3]
+    cree_taches_non_finies [0, 3]
 
     get :show
     assert_prediction_paco_equal "Paco prédit que le projet se finira le 10 janvier 2001"
     gg = assigns(:google_graph)
-    assert_equal [3, 4, '0,3|2,4|2,3|1,2'], [gg[:max_x], gg[:max_y], gg[:data]] 
+    assert_equal [3, 4, '0,3|3,4|0,1,3|0,1,2'], [gg[:max_x], gg[:max_y], gg[:data]] 
   end
   
   test "sait gérer le cas où le projet est interminable à ce rythme" do
@@ -29,7 +29,7 @@ class ProjetsControllerTest < ActionController::TestCase
   
   test "sait gérer la pondération" do
     cree_taches_finies [0, 0], [2, 4]
-    projet.taches << Factory(:tache, :date_entree => demarrage + 4.days, :poids => 2)
+    projet.taches << Factory(:tache, :date_entree => demarrage + 4.days, :poids => 3)
 
     get :show
     assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
@@ -64,6 +64,7 @@ class ProjetsControllerTest < ActionController::TestCase
 
     get :show
     assert_prediction_paco_equal "Paco ne sait pas encore prédire la date de fin du projet"
+    assert_equal '0,1,3|2,3,3|0,3|0,0', assigns(:google_graph)[:data]
   end
 
   private
