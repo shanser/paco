@@ -2,7 +2,7 @@ class CreateProjets < ActiveRecord::Migration
   def self.up
     create_table :projets, :force => true do |t|
     end
-    projet = Projet.first
+    projet = Projet.create
     Tache.all.each do |tache|
       projet.taches << tache
     end
