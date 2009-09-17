@@ -1,6 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :etiquetages, :only => :index
-  map.resource :projet, :only => :show
   
   map.namespace :admin do |admin|
     admin.resources :etiquetages

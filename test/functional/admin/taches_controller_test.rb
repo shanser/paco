@@ -17,12 +17,7 @@ class Admin::TachesControllerTest < ActionController::TestCase
       post :create, :tache => {:description => 'tache' }
     end
 
-    assert_redirected_to admin_projet_tache_path(assigns(:tache))
-  end
-
-  test "should show tache" do
-    get :show, :id => Factory(:tache)
-    assert_response :success
+    assert_redirected_to admin_projet_path
   end
 
   test "should get edit" do
@@ -32,7 +27,7 @@ class Admin::TachesControllerTest < ActionController::TestCase
 
   test "should update tache" do
     put :update, :id => Factory(:tache), :tache => { }
-    assert_redirected_to admin_projet_tache_path(assigns(:tache))
+    assert_redirected_to admin_projet_path
   end
 
   test "should destroy tache" do

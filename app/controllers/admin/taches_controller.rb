@@ -1,17 +1,6 @@
 class Admin::TachesController < ApplicationController
   layout 'admin'
   before_filter :set_admin
-  
-  # GET /taches/1
-  # GET /taches/1.xml
-  def show
-    @tache = Tache.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @tache }
-    end
-  end
 
   # GET /taches/new
   # GET /taches/new.xml
@@ -39,7 +28,7 @@ class Admin::TachesController < ApplicationController
     respond_to do |format|
       if @tache.save
         flash[:notice] = 'Tache was successfully created.'
-        format.html { redirect_to(admin_projet_tache_path(@tache)) }
+        format.html { redirect_to(admin_projet_path) }
         format.xml  { render :xml => @tache, :status => :created, :location => @tache }
       else
         format.html { render :action => "new" }
@@ -56,7 +45,7 @@ class Admin::TachesController < ApplicationController
     respond_to do |format|
       if @tache.update_attributes(params[:tache])
         flash[:notice] = 'Tache was successfully updated.'
-        format.html { redirect_to(admin_projet_tache_path(@tache)) }
+        format.html { redirect_to(admin_projet_path) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

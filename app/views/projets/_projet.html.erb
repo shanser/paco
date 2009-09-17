@@ -5,7 +5,7 @@
 
 <h3>Backlog</h3>
 
-<%= link_to 'Ajouter une tâche', new_admin_projet_tache_path %>
+<%= link_to 'Ajouter une tâche', new_admin_projet_tache_path if mode_admin? %>
 
 <table>
   <tr>
@@ -34,4 +34,4 @@
 <% end %>
 </table>
 
-<%= link_to 'Ajouter une tâche', new_admin_projet_tache_path %>
+<%= link_to 'Ajouter une tâche', new_admin_projet_tache_path if mode_admin? %>
