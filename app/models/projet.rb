@@ -42,7 +42,7 @@ class Projet < ActiveRecord::Base
     aujourd_hui = jours_depuis_debut_projet(Time.now.to_date.to_i)
     if xs.last != aujourd_hui
       xs << aujourd_hui
-      ys << ys.last
+      ys << (ys.last.nil? ? 0 : ys.last)
     end
     NuagePoints.new xs, ys
   end

@@ -1,14 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :etiquetages, :only => :index
-  map.resources :taches, :only => :index
+  map.resource :projet, :only => :show
   
   map.namespace :admin do |admin|
     admin.resources :etiquetages
     admin.resources :tags
-    admin.resources :taches
+    admin.resource :projet, :has_many => :taches
   end
   
-  map.admin '/admin', :controller => 'admin/taches', :action => 'index'
+  map.admin '/admin', :controller => 'admin/projets', :action => 'show'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -43,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
-  map.root :controller => "taches"
+  map.root :controller => "projets", :action => 'show'
 
   # See how all your routes lay out with "rake routes"
 

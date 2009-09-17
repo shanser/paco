@@ -1,11 +1,10 @@
 require 'test_helper'
 
 class Admin::TachesControllerTest < ActionController::TestCase
-  test "should get index" do
-    Projet.create
-    get :index
-    assert_response :success
-    assert_admin
+  attr_reader :projet
+
+  def setup
+    @projet = Factory :projet
   end
   
   test "should get new" do
@@ -14,11 +13,11 @@ class Admin::TachesControllerTest < ActionController::TestCase
   end
 
   test "should create tache" do
-    assert_difference('Tache.count') do
+    assert_difference('projet.taches.count') do
       post :create, :tache => {:description => 'tache' }
     end
 
-    assert_redirected_to admin_tache_path(assigns(:tache))
+    assert_redirected_to admin_projet_tache_path(assigns(:tache))
   end
 
   test "should show tache" do
@@ -33,7 +32,7 @@ class Admin::TachesControllerTest < ActionController::TestCase
 
   test "should update tache" do
     put :update, :id => Factory(:tache), :tache => { }
-    assert_redirected_to admin_tache_path(assigns(:tache))
+    assert_redirected_to admin_projet_tache_path(assigns(:tache))
   end
 
   test "should destroy tache" do
@@ -42,7 +41,7 @@ class Admin::TachesControllerTest < ActionController::TestCase
       delete :destroy, :id => tache
     end
 
-    assert_redirected_to admin_taches_path
+    assert_redirected_to admin_projet_path
   end
   
 end

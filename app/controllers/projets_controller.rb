@@ -1,4 +1,4 @@
-class TachesController < ApplicationController
+class ProjetsController < ApplicationController
   mattr_accessor :correspondances
   self.correspondances = {:projet_termine => 'Paco constate que le projet est terminé',
                           :projet_interminable => 'Paco prédit que le projet ne se terminera jamais à ce rythme',
@@ -6,10 +6,10 @@ class TachesController < ApplicationController
   
   # GET /taches
   # GET /taches.xml
-  def index
-    @taches = Tache.all
+  def show
 
     projet = Projet.first
+    @taches = projet.taches
     @google_graph = projet.google_graph
     prediction = projet.prediction_date_fin
     correspondance = correspondances[prediction]

@@ -1,8 +1,0 @@
-<h2><%= @prediction_date_fin %></h2>
-
-<h3>Graphe de progression</h3>
-<%= image_tag "http://chart.apis.google.com/chart?chs=520x200&cht=lxy&chd=t:0,#{@google_graph[:max_x]}|0,0|#{@google_graph[:data]}&chxt=x,y&chds=0,#{@google_graph[:max_x]},0,#{@google_graph[:max_y]},0,#{@google_graph[:max_x]},0,#{@google_graph[:max_y]},0,#{@google_graph[:max_x]},0,#{@google_graph[:max_y]}&chxr=0,0,#{@google_graph[:max_x]},5|1,0,#{@google_graph[:max_y]},5&chm=b,CCCCEE,0,1,0|b,EECCCC,1,2,0" %>
-
-<h3>Backlog</h3>
-<%= render :partial => "listing" %>
-</table>

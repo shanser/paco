@@ -1,4 +1,4 @@
-class Admin::TachesController < TachesController
+class Admin::TachesController < ApplicationController
   layout 'admin'
   before_filter :set_admin
   
@@ -32,12 +32,14 @@ class Admin::TachesController < TachesController
   # POST /taches
   # POST /taches.xml
   def create
+    @projet = Projet.first
+    params[:tache][:projet_id] = @projet.id
     @tache = Tache.new(params[:tache])
 
     respond_to do |format|
       if @tache.save
         flash[:notice] = 'Tache was successfully created.'
-        format.html { redirect_to([:admin, @tache]) }
+        format.html { redirect_to(admin_projet_tache_path(@tache)) }
         format.xml  { render :xml => @tache, :status => :created, :location => @tache }
       else
         format.html { render :action => "new" }
@@ -54,7 +56,7 @@ class Admin::TachesController < TachesController
     respond_to do |format|
       if @tache.update_attributes(params[:tache])
         flash[:notice] = 'Tache was successfully updated.'
-        format.html { redirect_to([:admin, @tache]) }
+        format.html { redirect_to(admin_projet_tache_path(@tache)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -70,7 +72,7 @@ class Admin::TachesController < TachesController
     @tache.destroy
 
     respond_to do |format|
-      format.html { redirect_to(admin_taches_url) }
+      format.html { redirect_to(admin_projet_url) }
       format.xml  { head :ok }
     end
   end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TachesControllerTest < ActionController::TestCase
+class ProjetsControllerTest < ActionController::TestCase
   
   attr_accessor :projet
   
@@ -9,11 +9,11 @@ class TachesControllerTest < ActionController::TestCase
     bouchonne_le_temps
   end
   
-  test "should get index" do
+  test "should get show" do
     cree_taches_finies [0, 0], [2, 3]
     cree_taches_non_finies [3, 3]
 
-    get :index
+    get :show
     assert_prediction_paco_equal "Paco prédit que le projet se finira le 10 janvier 2001"
     gg = assigns(:google_graph)
     assert_equal [3, 4, '0,3|2,4|2,3|1,2'], [gg[:max_x], gg[:max_y], gg[:data]] 
@@ -23,7 +23,7 @@ class TachesControllerTest < ActionController::TestCase
     cree_taches_finies [0, 0], [0, 1]
     cree_taches_non_finies [0, 1, 1, 1]
 
-    get :index
+    get :show
     assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
   end
   
@@ -31,15 +31,22 @@ class TachesControllerTest < ActionController::TestCase
     cree_taches_finies [0, 0], [2, 4]
     projet.taches << Factory(:tache, :date_entree => demarrage + 4.days, :poids => 2)
 
-    get :index
+    get :show
     assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
   end
   
   test "sait gérer les projets terminés" do
      cree_taches_finies [0, 0], [0, 1]
      
-     get :index
+     get :show
      assert_prediction_paco_equal 'Paco constate que le projet est terminé'
+  end
+  
+  test "sait gérer un projet avec aucune tâche terminée" do
+    cree_taches_non_finies [0, 0, 1]
+
+    get :show
+    assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
   end
 
   private
