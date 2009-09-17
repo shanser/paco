@@ -99,6 +99,10 @@ class ProjetTest < ActiveSupport::TestCase
   
   def faux_resultat clefs, valeurs
     dates = clefs.map { |clef| demarrage + clef.days}
-    stub(:keys => dates, :values => valeurs)
+    retour = ActiveSupport::OrderedHash.new
+    dates.each_with_index do |date, index|
+      retour[date] = valeurs[index]
+    end
+    retour
   end
 end

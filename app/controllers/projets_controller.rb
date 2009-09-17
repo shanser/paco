@@ -4,8 +4,6 @@ class ProjetsController < ApplicationController
                           :projet_interminable => 'Paco prédit que le projet ne se terminera jamais à ce rythme',
                           :projection_impossible => 'Paco ne sait pas encore prédire la date de fin du projet'}
   
-  # GET /taches
-  # GET /taches.xml
   def show
 
     projet = Projet.first
