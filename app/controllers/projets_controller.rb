@@ -9,6 +9,8 @@ class ProjetsController < ApplicationController
   def show
 
     projet = Projet.first
+    @date_stabilisation_backlog = projet.date_stabilisation_backlog
+    @date_stabilisation_backlog ||= projet.date_debut
     @taches = projet.taches
     @google_graph = projet.google_graph
     prediction = projet.prediction_date_fin
