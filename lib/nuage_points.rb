@@ -13,12 +13,13 @@ class NuagePoints
     Point.new xs.first, ys.first
   end
 
-  def regression_lineaire
-    raise Paco::CalculProjectionImpossible if size == 0
-    return Droite.horizontale(first.y) if size == 1
+  def regression_lineaire x_debut_regression
+    xs_utile, ys_utile = construit_donnees_regression x_debut_regression
+    raise Paco::CalculProjectionImpossible if xs_utile.size == 0
+    return Droite.horizontale(first.y) if xs_utile.size == 1
     
     lineFit = LineFit.new
-    lineFit.setData xs, ys
+    lineFit.setData xs_utile, ys_utile
     ordonnee_origine_sorties, pente_sorties = lineFit.coefficients
     Droite.new ordonnee_origine_sorties, pente_sorties
   end
@@ -33,6 +34,19 @@ class NuagePoints
   
   def max_x
     xs.last
+  end
+  
+  private
+  
+  def construit_donnees_regression x_debut_regression
+    xs_retour, ys_retour = [], []
+    xs.each_with_index do |x, index|
+      if x >= x_debut_regression
+        xs_retour << x
+        ys_retour << ys[index]
+      end
+    end
+    [xs_retour, ys_retour]
   end
 end
 

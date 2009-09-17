@@ -12,8 +12,8 @@ class Projet < ActiveRecord::Base
   def prediction_date_fin
     return :projet_termine if termine?
     begin
-      droite_entrees = nuage_points_entrees.regression_lineaire
-      droite_sorties = nuage_points_sorties.regression_lineaire
+      droite_entrees = nuage_points_entrees.regression_lineaire x_debut_regression
+      droite_sorties = nuage_points_sorties.regression_lineaire x_debut_regression
       abcisse_intersection = droite_entrees.abcisse_intersection_avec droite_sorties
     rescue Paco::CalculProjectionImpossible
       return :projection_impossible
@@ -40,7 +40,6 @@ class Projet < ActiveRecord::Base
  
   def nuage_points parametres_requete
     result = taches.sum(:poids, parametres_requete)
-    result = traite_stabilisation_backlog result
     
     xs = result.keys.map{|t| jours_depuis_debut_projet t.to_i}
     ys = cumuls(result.values)
@@ -66,22 +65,9 @@ class Projet < ActiveRecord::Base
     taches.all? {|tache| tache.terminee?}
   end
   
-  def traite_stabilisation_backlog couples
-    return couples if date_stabilisation_backlog.nil?
-    result = ActiveSupport::OrderedHash.new
-    couples.each do |date, nombre|
-      date_a_prendre = date < date_stabilisation_backlog ? date_stabilisation_backlog : date
-      ajoute_valeur_couples! result, date_a_prendre, nombre
-    end
-    result
-  end
-  
-  def ajoute_valeur_couples! couples, date, nombre
-    if couples[date].nil?
-      couples[date] = nombre
-    else
-      couples[date] += nombre
-    end
+  def x_debut_regression
+    date_debut_regression = date_stabilisation_backlog.nil? ? date_debut : date_stabilisation_backlog
+    jours_depuis_debut_projet date_debut_regression.to_date.to_i
   end
 end
 

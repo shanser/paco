@@ -57,6 +57,14 @@ class ProjetsControllerTest < ActionController::TestCase
     get :show
     assert_prediction_paco_equal "Paco prédit que le projet se finira le 09 janvier 2001"
   end
+  
+  test "sait gérer quand aucune tâche n'est terminée après la stabilisation du backlog" do
+    projet.update_attribute(:date_stabilisation_backlog, demarrage + 2.days)
+    cree_taches_non_finies [0, 0, 1]
+
+    get :show
+    assert_prediction_paco_equal "Paco ne sait pas encore prédire la date de fin du projet"
+  end
 
   private
   def cree_taches_finies dates_entree, dates_sortie
