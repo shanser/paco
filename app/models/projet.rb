@@ -32,6 +32,10 @@ class Projet < ActiveRecord::Base
     retour
   end
   
+  def date_debut
+    taches.minimum(:date_entree)
+  end
+  
   private
  
   def nuage_points parametres_requete
@@ -45,10 +49,6 @@ class Projet < ActiveRecord::Base
       ys << (ys.last.nil? ? 0 : ys.last)
     end
     NuagePoints.new xs, ys
-  end
-  
-  def date_debut
-    taches.minimum(:date_entree)
   end
   
   def timestamp_debut
