@@ -32,8 +32,8 @@ class Projet < ActiveRecord::Base
     retour
   end
   
-  def date_debut
-    taches.minimum(:date_entree)
+  def date_stabilisation_backlog
+    self[:date_stabilisation_backlog] || date_debut
   end
   
   private
@@ -49,7 +49,7 @@ class Projet < ActiveRecord::Base
       ys = [0] + ys
     end
     
-    aujourd_hui = jours_depuis_debut_projet(Time.now.to_date.to_i)
+    aujourd_hui = jours_depuis_debut_projet(Time.now.beginning_of_day.to_i)
     if xs.last != aujourd_hui
       xs << aujourd_hui
       ys << (ys.last.nil? ? 0 : ys.last)
@@ -59,7 +59,7 @@ class Projet < ActiveRecord::Base
   
   def timestamp_debut
     date_minimum = date_debut
-    date_minimum.nil? ? 0 : date_minimum.to_date.to_i
+    date_minimum.nil? ? 0 : date_minimum.to_i
   end
   
   def jours_depuis_debut_projet valeur
@@ -70,9 +70,12 @@ class Projet < ActiveRecord::Base
     taches.all? {|tache| tache.terminee?}
   end
   
+  def date_debut
+    taches.minimum(:date_entree)
+  end
+  
   def x_debut_regression
-    date_debut_regression = date_stabilisation_backlog.nil? ? date_debut : date_stabilisation_backlog
-    jours_depuis_debut_projet date_debut_regression.to_date.to_i
+    jours_depuis_debut_projet date_stabilisation_backlog.to_i
   end
 end
 

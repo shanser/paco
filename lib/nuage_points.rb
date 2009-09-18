@@ -1,5 +1,5 @@
 class NuagePoints
-  attr_reader :xs, :ys, :timestamp_debut
+  attr_reader :xs, :ys
   
   def initialize xs, ys
     @xs, @ys = xs, ys
