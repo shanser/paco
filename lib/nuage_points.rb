@@ -14,7 +14,7 @@ class NuagePoints
   end
 
   def regression_lineaire x_debut_regression
-    xs_utile, ys_utile = construit_donnees_regression x_debut_regression
+    xs_utile, ys_utile = donnees_regression x_debut_regression
     raise Paco::CalculProjectionImpossible if xs_utile.size == 0
     return Droite.horizontale(first.y) if xs_utile.size == 1
     
@@ -38,7 +38,7 @@ class NuagePoints
   
   private
   
-  def construit_donnees_regression x_debut_regression
+  def donnees_regression x_debut_regression
     couples = xs.zip(ys)
     couples = couples.select{|x, y| x >= x_debut_regression}
     couples.unzip
