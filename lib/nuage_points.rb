@@ -39,18 +39,22 @@ class NuagePoints
   private
   
   def construit_donnees_regression x_debut_regression
-    xs_retour, ys_retour = [], []
-    xs.each_with_index do |x, index|
-      if x >= x_debut_regression
-        xs_retour << x
-        ys_retour << ys[index]
-      end
-    end
-    [xs_retour, ys_retour]
+    couples = xs.zip(ys)
+    couples = couples.select{|x, y| x >= x_debut_regression}
+    couples.unzip
   end
 end
 
 
+class Array
+  def unzip
+    a, b  = [], []
+    each do |x, y|
+      a << x; b << y;
+    end
+    [a, b]
+  end
+end
 
 class Droite
   attr_accessor :ordonnee_origine, :pente
