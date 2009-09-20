@@ -57,10 +57,7 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_entrees [], []
     bouchonne_taches_sorties [0, 4], [1, 1]
 
-    nuage = projet.nuage_points_sorties
-    assert_equal 3, nuage.size
-    assert_equal [0, 4, 6], nuage.xs
-    assert_equal [1, 2, 2], nuage.ys 
+    assert_equal "0,6|0,0|0,4,6|1,2,2", projet.google_graph[:data]
   end
 
   test "sait renvoyer les donnees au format google graph" do

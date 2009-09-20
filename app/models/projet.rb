@@ -1,14 +1,6 @@
 class Projet < ActiveRecord::Base
   has_many :taches
  
-  def nuage_points_entrees
-    nuage_points({:group => :date_entree, :order => :date_entree})
-  end
-  
-  def nuage_points_sorties
-    nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
-  end
- 
   def prediction_date_fin
     return :projet_termine if termine?
     begin
@@ -76,6 +68,14 @@ class Projet < ActiveRecord::Base
   
   def x_debut_regression
     jours_depuis_debut_projet date_stabilisation_backlog.to_i
+  end
+  
+  def nuage_points_entrees
+    nuage_points({:group => :date_entree, :order => :date_entree})
+  end
+  
+  def nuage_points_sorties
+    nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
   end
 end
 
