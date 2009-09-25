@@ -2,6 +2,7 @@ require 'test_helper'
 
 class EtiquetagesControllerTest < ActionController::TestCase
   test "should get index" do
+    Factory :projet
     t1, t2 = Factory(:tag), Factory(:tag)
     e1, e2, e3 = [t1, t2, t1].map{|tag| Factory :etiquetage, :tag => tag}
     get :index

@@ -16,14 +16,10 @@
 	<%= link_to image_tag('logo.png'), 'http://github.com/captivestudio/paco' %>
 	<dl>
 		<dt>Projet Paco</dt>
-		<dd>stabilisation le <%= projet_courant.date_stabilisation_backlog %></dd>
+		<dd><%= "stabilisation le #{l projet_courant.date_stabilisation_backlog}" unless projet_courant.date_stabilisation_backlog.nil? %></dd>
 	</dl>
 </div>
-<ul id='menu'>
-	<li class='first active'><%= link_to 'Projet', root_path %></li>
-	<li><%= link_to 'Etiquetages', etiquetages_path %></li>
-	<li class='last'><%= link_to 'Admin', admin_path %></li>
-</ul>
+<%= render :partial => "layouts/menu_#{mode_admin? ? 'admin' : 'public'}" %>
 <div id='main'>
 	<p style="color: green"><%= flash[:notice] %></p>
 	<%= yield %>

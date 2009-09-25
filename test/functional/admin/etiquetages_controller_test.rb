@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class Admin::EtiquetagesControllerTest < ActionController::TestCase
+  def setup 
+    Factory :projet
+  end
+  
   should "get index" do
     Factory :etiquetage
     get :index

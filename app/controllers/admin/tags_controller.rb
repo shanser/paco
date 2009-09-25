@@ -1,6 +1,6 @@
 class Admin::TagsController < ApplicationController
-  layout 'admin'
-
+  before_filter :set_admin
+  
   # GET /tags
   # GET /tags.xml
   def index

@@ -1,5 +1,4 @@
 class Admin::TachesController < ApplicationController
-  layout 'admin'
   before_filter :set_admin
 
   # GET /taches/new

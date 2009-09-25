@@ -45,7 +45,6 @@ class ActiveSupport::TestCase
   end
   
   def assert_admin
-    assert_layout('admin')
     assert_not_nil assigns(:mode_admin)
   end
 end

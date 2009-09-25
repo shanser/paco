@@ -1,5 +1,4 @@
 class Admin::EtiquetagesController < EtiquetagesController
-  layout 'admin'
   before_filter :set_admin
   before_filter :setup_taches_and_tags, :only => [:new, :edit]
   

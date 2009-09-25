@@ -1,11 +1,15 @@
 require 'test_helper'
 
 class Admin::TagsControllerTest < ActionController::TestCase
+  def setup 
+    Factory :projet
+  end
+  
   test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:tags)
-    assert_layout 'admin'
+    assert_admin
   end
 
   test "should get new" do
