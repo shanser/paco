@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
+  helper_method :projet_courant
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
@@ -10,5 +11,9 @@ class ApplicationController < ActionController::Base
   
   def set_admin
     @mode_admin = true
+  end
+  
+  def projet_courant
+    Projet.first
   end
 end

@@ -1,4 +1,4 @@
-body, html, ul, li, h1, img {margin:0;padding:0;list-style:none;border:0;}
+body, html, ul, li, h1, img, dl, dt, dd {margin:0;padding:0;list-style:none;border:0;}
 
 body, html {
 	font-family:"Lucida Grande";
@@ -38,6 +38,22 @@ h1 {
 #content #header {
 	height:56px;
 	padding:22px 0;
+}
+
+#content #header dl {
+	float:right;
+	padding:10px 0;
+	text-align:right;
+}
+
+#content #header dt {
+	font-size:15px;
+	font-weight:bold;
+}
+
+#content #header dd {
+	font-size:11px;
+	margin-top:5px;
 }
 
 #content #menu li {
