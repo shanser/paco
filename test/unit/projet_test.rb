@@ -59,12 +59,20 @@ class ProjetTest < ActiveSupport::TestCase
 
     assert_equal "0,6|0,0|0,4,6|1,2,2", projet.google_graph[:data]
   end
+  
+  test "un projet sans date de stabilisation backlog met une verticale à l'origine dans le google graph" do
+    bouchonne_taches_entrees [0], [4]
+    bouchonne_taches_sorties [], []
 
-  test "sait renvoyer les donnees au format google graph" do
-    bouchonne_taches_entrees [0, 4], [2, 1]
-    bouchonne_taches_sorties [2, 4], [1, 1]
-    
-    assert_equal '0,4|2,3|0,2,4|0,1,2', projet.google_graph[:data]
+    assert_equal "0,0|0,4", projet.google_graph[:stabilisation_backlog]
+  end
+  
+  test "un projet avec date de stabilisation backlog met un verticale à cette date dans le google graph" do
+    @projet.date_stabilisation_backlog = demarrage + 2.days
+    bouchonne_taches_entrees [0], [4]
+    bouchonne_taches_sorties [], []
+
+    assert_equal "2,2|0,4", projet.google_graph[:stabilisation_backlog]
   end
 
   test "cumuls d'un singleton est ce singleton lui-même" do

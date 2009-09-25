@@ -21,6 +21,8 @@ class Projet < ActiveRecord::Base
     retour[:max_x] = nuage_points_entrees.max_x
     retour[:max_y] = nuage_points_entrees.max_y
     retour[:data] = [nuage_points_entrees, nuage_points_sorties].map(&:to_google_graph_data).join('|')
+    x_stabilisation = jours_depuis_debut_projet date_stabilisation_backlog.to_i
+    retour[:stabilisation_backlog] = "#{x_stabilisation},#{x_stabilisation}|0,#{retour[:max_y]}"
     retour
   end
   
@@ -29,6 +31,14 @@ class Projet < ActiveRecord::Base
   end
   
   private
+  
+  def nuage_points_entrees
+    nuage_points({:group => :date_entree, :order => :date_entree})
+  end
+  
+  def nuage_points_sorties
+    nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
+  end
  
   def nuage_points parametres_requete
     result = taches.sum(:poids, parametres_requete)
@@ -68,14 +78,6 @@ class Projet < ActiveRecord::Base
   
   def x_debut_regression
     jours_depuis_debut_projet date_stabilisation_backlog.to_i
-  end
-  
-  def nuage_points_entrees
-    nuage_points({:group => :date_entree, :order => :date_entree})
-  end
-  
-  def nuage_points_sorties
-    nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
   end
 end
 
