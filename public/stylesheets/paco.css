@@ -1,0 +1,91 @@
+body, html, ul, li, h1, img {margin:0;padding:0;list-style:none;border:0;}
+
+body, html {
+	font-family:"Lucida Grande";
+	font-size:14px;
+}
+
+a {
+	color:#333333;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+h1 {
+	font-size:24px;
+	font-weight:normal;
+	margin-bottom:35px;
+	text-align:center;
+}
+
+#menubg {
+	background:transparent url(/images/menubg.png) repeat scroll 0 0;
+	height:50px;
+	position:absolute;
+	top:100px;
+	width:100%;
+}
+
+#content {
+	margin:auto;
+	position:relative;
+	width:960px;
+}
+
+#content #header {
+	height:56px;
+	padding:22px 0;
+}
+
+#content #menu li {
+	float:left;
+	font-size:16px;
+	letter-spacing:-1px;
+	padding:15px 30px;
+	text-transform:uppercase;
+}
+
+#content #menu {
+	height:50px;
+}
+
+#content #menu li.first {
+	padding-left:0;
+}
+
+#content #menu li.active {
+	font-weight:bold;
+}
+
+#content #menu li.last {
+	padding-right:0;
+	float:right;
+}
+
+#content #main {
+	margin-top:40px;
+	clear:both;
+}
+
+.google-graphe-top, .google-graphe-bottom {
+	width:960px;
+	height:5px;
+}
+
+.google-graphe-bottom {
+	background:transparent url(/images/graphebottom.png) repeat scroll 0 0;
+}
+
+.google-graphe-top {
+	background:transparent url(/images/graphetop.png) repeat scroll 0 0;
+	
+}
+
+.google-graphe {
+	background:transparent url(/images/graphebg.png) repeat scroll 0 0;
+	padding:20px 10px 10px;
+	width:940px;
+}
