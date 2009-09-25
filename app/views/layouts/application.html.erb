@@ -15,7 +15,7 @@
 <div id='header'>
 	<%= link_to image_tag('logo.png'), 'http://github.com/captivestudio/paco' %>
 	<dl>
-		<dt>Projet Paco</dt>
+		<dt>Projet <%= projet_courant.nom %></dt>
 		<dd><%= "stabilisation le #{l projet_courant.date_stabilisation_backlog}" unless projet_courant.date_stabilisation_backlog.nil? %></dd>
 	</dl>
 </div>

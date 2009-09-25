@@ -3,6 +3,11 @@
 <% form_for([:admin, @projet]) do |f| %>
   <%= f.error_messages %>
 
+	<p>
+		<%= f.label :nom %><br />
+		<%= f.text_field :nom %>
+	</p>
+
   <p>
     <%= f.label :date_stabilisation_backlog %><br />
     <%= f.date_select :date_stabilisation_backlog %>
