@@ -17,6 +17,7 @@
 	<dl>
 		<dt>Projet <%= projet_courant.nom %></dt>
 		<dd><%= "stabilisation le #{l projet_courant.date_stabilisation_backlog}" unless projet_courant.date_stabilisation_backlog.nil? %></dd>
+		<dd><%= link_to 'modifier les paramètres', edit_admin_projet_path if mode_admin? %></dd>
 	</dl>
 </div>
 <%= render :partial => "layouts/menu_#{mode_admin? ? 'admin' : 'public'}" %>
