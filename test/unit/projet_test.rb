@@ -3,6 +3,7 @@ require 'test_helper'
 class ProjetTest < ActiveSupport::TestCase
   attr_reader :demarrage, :projet
   
+  subject {@projet}
   should_have_many :taches
   
   def setup
