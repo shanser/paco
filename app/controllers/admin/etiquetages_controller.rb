@@ -70,7 +70,7 @@ class Admin::EtiquetagesController < EtiquetagesController
     @etiquetage.destroy
 
     respond_to do |format|
-      format.html { redirect_to(etiquetages_url) }
+      format.html { redirect_to(admin_etiquetages_url) }
       format.xml  { head :ok }
     end
   end

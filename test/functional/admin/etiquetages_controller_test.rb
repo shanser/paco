@@ -46,6 +46,6 @@ class Admin::EtiquetagesControllerTest < ActionController::TestCase
       delete :destroy, :id => etiquetage
     end
 
-    assert_redirected_to etiquetages_path
+    assert_redirected_to admin_etiquetages_path
   end
 end
