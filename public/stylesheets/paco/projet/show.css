@@ -1,0 +1,37 @@
+#main dl {
+	margin:3px 0;
+	padding:5px 0;
+}
+
+#main dl dt {
+	color:#00AEF0;
+}
+
+#main dl.terminee dt {
+	color:#afc800;
+}
+
+#main dl dd {
+	color:#666666;
+	font-size:12px;
+}
+
+#main dl.even {
+	background:#E8F8FD;
+}
+
+#main dl.odd {
+	background:#F7FDFE;
+}
+
+#main dl.even.terminee {
+	background:#f7fbf2;
+}
+
+#main dl.odd.terminee {
+	background:#FCFEFB;
+}
+
+#main .liens {
+	margin:10px 0;
+}

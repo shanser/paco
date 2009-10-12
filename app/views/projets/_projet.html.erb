@@ -1,4 +1,5 @@
 <% content_for :head do %>
+	<%= stylesheet_link_tag 'paco/projet/show' %>
 	<%= javascript_include_tag 'paco/projet/show' %>
 <% end %>
 
@@ -14,40 +15,28 @@
 
 <h3>Backlog</h3>
 
+<div class='liens'>
 <%= link_to 'Afficher/Masquer les tâches terminées', '#', :class => :toggle_terminees %>
 <% if mode_admin? %>
 	| <%= link_to 'Ajouter une tâche', new_admin_projet_tache_path %>
 <% end %>
+</div>
 
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Date entrée</th>
-    <th>Description</th>
-    <th>Statut</th>
-    <th>Date sortie</th>
-    <th>Poids</th>
-    <th>Commentaire</th>
-  </tr>
 
 <% @taches.each do |tache| %>
-  <tr <%= "class='terminee'" if tache.terminee? %>>
-    <td><%=h tache.id %></td>
-    <td><%=l tache.date_entree %></td>
-    <td><%=h tache.description %></td>
-    <td><%=h tache.statut %></td>
-    <td><%=l tache.date_sortie if tache.date_sortie %></td>
-    <td><%=h tache.poids %></td>
-    <td><%=h tache.commentaire %></td>
-    <td><%= link_to 'Show', admin_projet_tache_path(tache) if mode_admin? %></td>
-    <td><%= link_to 'Edit', edit_admin_projet_tache_path(tache) if mode_admin? %></td>
-    <td><%= link_to 'Destroy', admin_projet_tache_path(tache), :confirm => 'Are you sure?', :method => :delete if mode_admin? %></td>
-  </tr>
+  <dl class='<%= cycle('even', 'odd') %> <%= "terminee" if tache.terminee? %>'>
+    <dt>#<%=h tache.id %> : <%=h tache.description %></dt>
+    <dd>entrée le <%=l tache.date_entree %>, <%= "sortie le #{l tache.date_sortie}," if tache.date_sortie %> poids <%=h tache.poids %></dd>
+    <%= "<dd> #{tache.commentaire} </dd>" if tache.commentaire %>
+		<% if mode_admin?  %>
+		<dd><%= link_to 'Show', admin_projet_tache_path(tache) %> | <%= link_to 'Edit', edit_admin_projet_tache_path(tache)  %> | <%= link_to 'Destroy', admin_projet_tache_path(tache), :confirm => 'Are you sure?', :method => :delete %></dd>
+		<% end %>
+  </dl>
 <% end %>
-</table>
 
+<div class='liens'>
 <%= link_to 'Afficher/Masquer les tâches terminées', '#', :class => :toggle_terminees %>
 <% if mode_admin? %>
 	| <%= link_to 'Ajouter une tâche', new_admin_projet_tache_path %>
 <% end %>
-
+</div>
