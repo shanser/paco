@@ -16,20 +16,12 @@
 	font-size:12px;
 }
 
-#main dl.even {
+#main dl {
 	background:#E8F8FD;
 }
 
-#main dl.odd {
-	background:#F7FDFE;
-}
-
-#main dl.even.terminee {
+#main dl.terminee {
 	background:#f7fbf2;
-}
-
-#main dl.odd.terminee {
-	background:#FCFEFB;
 }
 
 #main .liens {
