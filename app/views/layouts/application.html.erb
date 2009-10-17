@@ -9,22 +9,28 @@
 	<%= javascript_include_tag 'jquery-1.3.2.min' %>
 	<%= yield :head %>
 </head>
+
 <body>
 	<div id='menubg'></div>
+
 	<div id='content'>
-<div id='header'>
-	<%= link_to image_tag('logo.png'), 'http://github.com/captivestudio/paco' %>
-	<dl>
-		<dt>Projet <%= projet_courant.nom %></dt>
-		<dd><%= "stabilisation le #{l projet_courant.date_stabilisation_backlog}" unless projet_courant.date_stabilisation_backlog.nil? %></dd>
-		<dd><%= link_to 'modifier les paramètres', edit_admin_projet_path if mode_admin? %></dd>
-	</dl>
-</div>
-<%= render :partial => "layouts/menu_#{mode_admin? ? 'admin' : 'public'}" %>
-<div id='main'>
-	<p style="color: green"><%= flash[:notice] %></p>
-	<%= yield %>
-</div>
+
+    <div id='header'>
+  	  <%= link_to image_tag('logo.png'), 'http://github.com/captivestudio/paco' %>
+  	  <dl>
+  		  <dt>Projet <%= projet_courant.nom %></dt>
+  		  <dd><%= "stabilisation le #{l projet_courant.date_stabilisation_backlog}" unless projet_courant.date_stabilisation_backlog.nil? %></dd>
+  		  <dd><%= "date de fin souhaitée pour le #{l projet_courant.deadline}" unless projet_courant.deadline.nil? %></dd>
+  		  <dd><%= link_to 'modifier les paramètres', edit_admin_projet_path if mode_admin? %></dd>
+  	  </dl>
+    </div>
+
+    <%= render :partial => "layouts/menu_#{mode_admin? ? 'admin' : 'public'}" %>
+
+    <div id='main'>
+  	  <p style="color: green"><%= flash[:notice] %></p>
+  	  <%= yield %>
+    </div>
 
 	</div>
 </body>
