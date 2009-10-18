@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090925131327) do
+ActiveRecord::Schema.define(:version => 20091017212126) do
 
   create_table "etiquetages", :force => true do |t|
     t.integer "tache_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20090925131327) do
   create_table "projets", :force => true do |t|
     t.date   "date_stabilisation_backlog"
     t.string "nom",                        :default => "Demo"
+    t.date   "deadline"
   end
 
   create_table "taches", :force => true do |t|

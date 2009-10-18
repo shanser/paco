@@ -4,6 +4,7 @@
 <% end %>
 
 <h1><%= @prediction_date_fin %></h1>
+<h1><%= (@conclusion == :ok) ? "Tout va bien" : "C'est inquiétant" %></h1>
 
 <div class='google-graphe-top'></div>
 <div class='google-graphe'>

@@ -7,6 +7,7 @@ class ProjetsControllerTest < ActionController::TestCase
   def setup
     @projet = Projet.create
     bouchonne_le_temps
+    projet.update_attribute(:deadline, demarrage + 7.days)
   end
   
   test "should get show" do
@@ -26,24 +27,17 @@ class ProjetsControllerTest < ActionController::TestCase
     get :show
     assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
   end
-  
-  test "sait gérer la pondération" do
-    cree_taches_finies [0, 0], [2, 4]
-    projet.taches << Factory(:tache, :date_entree => demarrage + 4.days, :poids => 3)
+
+  test "sait gérer un projet avec aucune tâche terminée" do
+    cree_taches_non_finies [0, 0, 1]
 
     get :show
     assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
   end
   
-  test "sait gérer les projets terminés" do
-     cree_taches_finies [0, 0], [0, 1]
-     
-     get :show
-     assert_prediction_paco_equal 'Paco constate que le projet est terminé'
-  end
-  
-  test "sait gérer un projet avec aucune tâche terminée" do
-    cree_taches_non_finies [0, 0, 1]
+  test "sait gérer la pondération" do
+    cree_taches_finies [0, 0], [2, 4]
+    projet.taches << Factory(:tache, :date_entree => demarrage + 4.days, :poids => 3)
 
     get :show
     assert_prediction_paco_equal "Paco prédit que le projet ne se terminera jamais à ce rythme"
@@ -66,6 +60,33 @@ class ProjetsControllerTest < ActionController::TestCase
     assert_prediction_paco_equal "Paco ne sait pas encore prédire la date de fin du projet"
     assert_equal '0,1,3|2,3,3|0,3|0,0', assigns(:google_graph)[:data]
   end
+  
+  test "indique quand date prédiction fin du projet est avant date fin souhaitée" do
+    cree_taches_finies [0, 0], [2, 4]
+    cree_taches_non_finies [0]
+    
+    get :show
+    assert_prediction_paco_equal "Paco prédit que le projet se finira le 06 janvier 2001"
+    assert_equal :ok, assigns(:conclusion)
+  end
+  
+  test "indique quand date prediction fin de projet dépasse date fin souhaitée" do
+    projet.update_attribute(:deadline, demarrage + 5.days)
+    cree_taches_finies [0, 0], [2, 4]
+    cree_taches_non_finies [0]
+    
+    get :show
+    assert_equal :ko, assigns(:conclusion)    
+  end
+  
+  test "sait gérer les projets terminés" do
+     cree_taches_finies [0, 0], [0, 1]
+     
+     get :show
+     assert_prediction_paco_equal 'Paco constate que le projet est terminé'
+     assert_equal :ok, assigns(:conclusion)
+  end
+  
 
   private
   def cree_taches_finies dates_entree, dates_sortie

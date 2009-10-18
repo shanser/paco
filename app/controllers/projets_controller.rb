@@ -10,9 +10,13 @@ class ProjetsController < ApplicationController
     @date_stabilisation_backlog = projet.date_stabilisation_backlog
     @taches = projet.taches
     @google_graph = projet.google_graph
+
     prediction = projet.prediction_date_fin
     correspondance = correspondances[prediction]
     @prediction_date_fin = correspondance.nil? ? "Paco prédit que le projet se finira le #{I18n.l prediction}" : correspondance
+
+    @conclusion = :ko
+    @conclusion = :ok if (prediction == :projet_termine) or (!projet.deadline.nil? and correspondance.nil? and projet.deadline >= prediction)
 
     respond_to do |format|
       format.html # index.html.erb
