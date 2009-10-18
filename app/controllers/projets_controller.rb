@@ -36,7 +36,7 @@ class ProjetsController < ApplicationController
   end
   
   def dans_les_clous? projet, prediction
-    !projet.deadline.nil? and projet.deadline >= prediction
+    projet.deadline.nil? or projet.deadline >= prediction
   end
   
   def cas_normal? prediction

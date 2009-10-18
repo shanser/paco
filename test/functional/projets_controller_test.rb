@@ -78,6 +78,15 @@ class ProjetsControllerTest < ActionController::TestCase
     get :show
     assert_equal :ko, assigns(:conclusion)    
   end
+
+  test "indique que tout va bien quand aucune date fin souhaitée n'est spécifiée" do
+    projet.update_attribute(:deadline, nil)
+    cree_taches_finies [0, 0], [2, 4]
+    cree_taches_non_finies [0]
+    
+    get :show
+    assert_equal :ok, assigns(:conclusion)    
+  end
   
   test "sait gérer les projets terminés" do
      cree_taches_finies [0, 0], [0, 1]
