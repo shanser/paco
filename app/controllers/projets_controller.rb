@@ -1,8 +1,8 @@
 class ProjetsController < ApplicationController
-  mattr_accessor :correspondances
-  self.correspondances = {:projet_termine => 'Paco constate que le projet est terminé',
-                          :projet_interminable => 'Paco prédit que le projet ne se terminera jamais à ce rythme',
-                          :projection_impossible => 'Paco ne sait pas encore prédire la date de fin du projet'}
+  mattr_accessor :formulation
+  self.formulation = {:projet_termine => 'Paco constate que le projet est terminé',
+                      :projet_interminable => 'Paco prédit que le projet ne se terminera jamais à ce rythme',
+                      :projection_impossible => 'Paco ne sait pas encore prédire la date de fin du projet'}
   
   def show
 
@@ -12,15 +12,34 @@ class ProjetsController < ApplicationController
     @google_graph = projet.google_graph
 
     prediction = projet.prediction_date_fin
-    correspondance = correspondances[prediction]
-    @prediction_date_fin = correspondance.nil? ? "Paco prédit que le projet se finira le #{I18n.l prediction}" : correspondance
-
-    @conclusion = :ko
-    @conclusion = :ok if (prediction == :projet_termine) or (!projet.deadline.nil? and correspondance.nil? and projet.deadline >= prediction)
-
+    @prediction_date_fin = formulation_paco prediction
+    @conclusion = conclusion_paco projet, prediction
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @taches }
     end
   end
+
+
+  private
+
+  def formulation_paco prediction
+    (cas_normal? prediction) ? 
+      "Paco prédit que le projet se finira le #{I18n.l prediction}" : 
+      formulation[prediction]
+  end
+  
+  def conclusion_paco projet, prediction
+    return :ok if (prediction == :projet_termine) or (cas_normal?(prediction) and dans_les_clous?(projet, prediction))
+    :ko
+  end
+  
+  def dans_les_clous? projet, prediction
+    !projet.deadline.nil? and projet.deadline >= prediction
+  end
+  
+  def cas_normal? prediction
+    formulation[prediction].nil?
+  end  
 end
