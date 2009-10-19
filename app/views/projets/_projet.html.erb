@@ -30,7 +30,7 @@
     <dd>entrée le <%=l tache.date_entree %>, <%= "sortie le #{l tache.date_sortie}, statut #{tache.statut}," if tache.date_sortie %> poids <%=h tache.poids %></dd>
     <%= "<dd> #{tache.commentaire} </dd>" if tache.commentaire %>
 		<% if mode_admin?  %>
-		<dd><%= link_to 'Show', admin_projet_tache_path(tache) %> | <%= link_to 'Edit', edit_admin_projet_tache_path(tache)  %> | <%= link_to 'Destroy', admin_projet_tache_path(tache), :confirm => 'Are you sure?', :method => :delete %></dd>
+		<dd><%= link_to 'Edit', edit_admin_projet_tache_path(tache)  %> | <%= link_to 'Destroy', admin_projet_tache_path(tache), :confirm => 'Are you sure?', :method => :delete %></dd>
 		<% end %>
   </dl>
 <% end %>
