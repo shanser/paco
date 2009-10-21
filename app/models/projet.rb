@@ -50,7 +50,7 @@ class Projet < ActiveRecord::Base
     nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
   end
  
-  def nuage_points parametres_requete
+  def nuage_points parametres_requete, derniere_date = nil
     result = taches.sum(:poids, parametres_requete)
     
     xs = result.keys.map{|t| jours_depuis_debut_projet t.to_i}
@@ -60,14 +60,17 @@ class Projet < ActiveRecord::Base
       xs = [0] + xs
       ys = [0] + ys
     end
-    
+
     aujourd_hui = jours_depuis_debut_projet(Time.now.beginning_of_day.to_i)
-    if xs.last != aujourd_hui
-      xs << aujourd_hui
+    derniere_date = aujourd_hui if derniere_date.nil?
+    if xs.last != derniere_date
+      xs << derniere_date
       ys << (ys.last.nil? ? 0 : ys.last)
     end
+
     NuagePoints.new xs, ys
   end
+  
   
   def timestamp_debut
     date_minimum = date_debut
@@ -99,10 +102,13 @@ class Projet < ActiveRecord::Base
   def historique_projections
     couples = []
     1.upto(nuage_points_entrees.max_x) do |n|
-      sous_nuage_entrees = nuage_points_entrees.sous_nuage_points(n+1)
-      sous_nuage_sorties = nuage_points_sorties.sous_nuage_points(n+1)
+      date = date_debut + n.days
+      x_date = jours_depuis_debut_projet date.to_i
+      date = date + 1.days
+      nuage_entrees = nuage_points({:group => :date_entree, :order => :date_entree, :conditions => ["date_entree < ?", date.to_s(:db)]}, x_date)
+      nuage_sorties = nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => ["date_sortie IS NOT NULL AND date_sortie < ?", date.to_s(:db)]}, x_date)
       begin
-        abcisse_intersection = intersection_nuage_points sous_nuage_entrees, sous_nuage_sorties, x_debut_regression
+        abcisse_intersection = intersection_nuage_points nuage_entrees, nuage_sorties, x_debut_regression
         abcisse_intersection = abcisse_intersection.ceil
       rescue Paco::CalculProjectionImpossible
         abcisse_intersection = 0
