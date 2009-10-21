@@ -42,12 +42,20 @@ class Projet < ActiveRecord::Base
   
   private
   
-  def nuage_points_entrees
-    nuage_points({:group => :date_entree, :order => :date_entree})
+  def nuage_points_entrees derniere_date = nil
+    parametres_requete = {:group => :date_entree, :order => :date_entree}
+    parametres_requete[:conditions] = ["date_entree < ?", (derniere_date+1.day).to_s(:db)] unless derniere_date.nil?
+    x_date = derniere_date.nil? ? nil : jours_depuis_debut_projet(derniere_date.to_i)
+    
+    nuage_points parametres_requete, x_date
   end
   
-  def nuage_points_sorties
-    nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"})
+  def nuage_points_sorties derniere_date = nil
+    parametres_requete = {:group => :date_sortie, :order => :date_sortie, :conditions => "date_sortie IS NOT NULL"}
+    parametres_requete[:conditions] = ["date_sortie IS NOT NULL AND date_sortie < ?", (derniere_date+1.day).to_s(:db)] unless derniere_date.nil?
+    x_date = derniere_date.nil? ? nil : jours_depuis_debut_projet(derniere_date.to_i)
+    
+    nuage_points parametres_requete, x_date
   end
  
   def nuage_points parametres_requete, derniere_date = nil
@@ -103,10 +111,9 @@ class Projet < ActiveRecord::Base
     couples = []
     1.upto(nuage_points_entrees.max_x) do |n|
       date = date_debut + n.days
-      x_date = jours_depuis_debut_projet date.to_i
-      date = date + 1.days
-      nuage_entrees = nuage_points({:group => :date_entree, :order => :date_entree, :conditions => ["date_entree < ?", date.to_s(:db)]}, x_date)
-      nuage_sorties = nuage_points({:group => :date_sortie, :order => :date_sortie, :conditions => ["date_sortie IS NOT NULL AND date_sortie < ?", date.to_s(:db)]}, x_date)
+      nuage_entrees = nuage_points_entrees date
+      nuage_sorties = nuage_points_sorties date
+
       begin
         abcisse_intersection = intersection_nuage_points nuage_entrees, nuage_sorties, x_debut_regression
         abcisse_intersection = abcisse_intersection.ceil
