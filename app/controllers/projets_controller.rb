@@ -10,6 +10,7 @@ class ProjetsController < ApplicationController
     @date_stabilisation_backlog = projet.date_stabilisation_backlog
     @taches = projet.taches
     @google_graph = projet.google_graph
+    @graphe_historique = projet.graphe_historique
 
     prediction = projet.prediction_date_fin
     @prediction_date_fin = formulation_paco prediction

@@ -96,7 +96,16 @@ class ProjetsControllerTest < ActionController::TestCase
      assert_equal :ok, assigns(:conclusion)
   end
   
+  test "sait donner l'historique des projections" do
+    cree_taches_finies [0, 0, 0], [1, 2, 2]
+    cree_taches_non_finies [0, 0]
 
+    get :show
+    assert_equal "1,2,3|5,4,5", assigns(:graphe_historique)[:data]
+    assert_equal 3, assigns(:graphe_historique)[:max_x]
+    assert_equal 5, assigns(:graphe_historique)[:max_y]
+  end
+  
   private
   def cree_taches_finies dates_entree, dates_sortie
     dates = dates_entree.zip(dates_sortie)

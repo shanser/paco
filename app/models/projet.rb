@@ -4,9 +4,7 @@ class Projet < ActiveRecord::Base
   def prediction_date_fin
     return :projet_termine if termine?
     begin
-      droite_entrees = nuage_points_entrees.regression_lineaire x_debut_regression
-      droite_sorties = nuage_points_sorties.regression_lineaire x_debut_regression
-      abcisse_intersection = droite_entrees.abcisse_intersection_avec droite_sorties
+      abcisse_intersection = intersection_nuage_points nuage_points_entrees, nuage_points_sorties, x_debut_regression
     rescue Paco::CalculProjectionImpossible
       return :projection_impossible
     end
@@ -28,6 +26,30 @@ class Projet < ActiveRecord::Base
   
   def date_stabilisation_backlog
     self[:date_stabilisation_backlog] || date_debut
+  end
+  
+  def graphe_historique
+    retour = {}
+    couples = []
+    1.upto(nuage_points_entrees.max_x) do |n|
+      sous_nuage_entrees = nuage_points_entrees.sous_nuage_points(n+1)
+      sous_nuage_sorties = nuage_points_sorties.sous_nuage_points(n+1)
+      begin
+        abcisse_intersection = intersection_nuage_points sous_nuage_entrees, sous_nuage_sorties, x_debut_regression
+        abcisse_intersection = abcisse_intersection.ceil
+      rescue Paco::CalculProjectionImpossible
+        abcisse_intersection = 0
+      end
+      couples << [n, abcisse_intersection]
+    end
+    
+    abcisses, ordonnees = couples.unzip
+    retour[:max_x] = abcisses.max
+    retour[:max_y] = ordonnees.max
+    abcisses = abcisses.join(',')
+    ordonnees = ordonnees.join(',')
+    retour[:data] = [abcisses, ordonnees].join('|')
+    retour
   end
   
   private
@@ -78,6 +100,12 @@ class Projet < ActiveRecord::Base
   
   def x_debut_regression
     jours_depuis_debut_projet date_stabilisation_backlog.to_i
+  end
+  
+  def intersection_nuage_points nuage_entrees, nuage_sorties, debut_regression
+    droite_entrees = nuage_entrees.regression_lineaire debut_regression
+    droite_sorties = nuage_sorties.regression_lineaire debut_regression
+    droite_entrees.abcisse_intersection_avec droite_sorties
   end
 end
 

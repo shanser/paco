@@ -11,6 +11,10 @@
 
 <%= image_tag "http://chart.apis.google.com/chart?chs=930x300&cht=lxy&chd=t:0,#{@google_graph[:max_x]}|0,0|#{@google_graph[:data]}|#{@google_graph[:stabilisation_backlog]}&chxt=x,y&chds=0,#{@google_graph[:max_x]},0,#{@google_graph[:max_y]},0,#{@google_graph[:max_x]},0,#{@google_graph[:max_y]},0,#{@google_graph[:max_x]},0,#{@google_graph[:max_y]},0,#{@google_graph[:max_x]},0,#{@google_graph[:max_y]}&chxr=0,0,#{@google_graph[:max_x]},5|1,0,#{@google_graph[:max_y]},5&chm=b,e6f2d5,0,1,0|b,b2e7fa,1,2,0&chco=666666,00aef0,afc800,666666&chls=1,1,0|2,1,0|2,1,0|1,3,2" %>
 
+<%= image_tag "http://chart.apis.google.com/chart?chs=930x300&cht=lxy&chd=t:#{@graphe_historique[:data]}&chxt=x,y&chds=0,#{@graphe_historique[:max_x]},0,#{@graphe_historique[:max_y]}&chxr=0,0,#{@graphe_historique[:max_x]},5&chco=666666" %>
+
+
+
 </div>
 <div class='google-graphe-bottom'></div>
 

@@ -36,6 +36,10 @@ class NuagePoints
     xs.last
   end
   
+  def sous_nuage_points taille
+    NuagePoints.new xs[0, taille], ys[0, taille]
+  end
+  
   private
   
   def donnees_regression x_debut_regression
