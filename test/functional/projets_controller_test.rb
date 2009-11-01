@@ -67,7 +67,7 @@ class ProjetsControllerTest < ActionController::TestCase
     
     get :show
     assert_prediction_paco_equal "Paco prédit que le projet se finira le 06 janvier 2001"
-    assert_equal :ok, assigns(:conclusion)
+    assert assigns(:tout_va_bien)
   end
   
   test "indique quand date prediction fin de projet dépasse date fin souhaitée" do
@@ -76,7 +76,7 @@ class ProjetsControllerTest < ActionController::TestCase
     cree_taches_non_finies [0]
     
     get :show
-    assert_equal :ko, assigns(:conclusion)    
+    assert !assigns(:tout_va_bien)    
   end
 
   test "indique que tout va bien quand aucune date fin souhaitée n'est spécifiée" do
@@ -85,7 +85,7 @@ class ProjetsControllerTest < ActionController::TestCase
     cree_taches_non_finies [0]
     
     get :show
-    assert_equal :ok, assigns(:conclusion)    
+    assert assigns(:tout_va_bien)    
   end
   
   test "sait gérer les projets terminés" do
@@ -93,7 +93,7 @@ class ProjetsControllerTest < ActionController::TestCase
      
      get :show
      assert_prediction_paco_equal 'Paco constate que le projet est terminé'
-     assert_equal :ok, assigns(:conclusion)
+     assert assigns(:tout_va_bien)
   end
   
   test "sait donner l'historique des projections" do

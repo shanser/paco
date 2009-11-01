@@ -12,35 +12,12 @@ class ProjetsController < ApplicationController
     @google_graph = projet.google_graph
     @graphe_historique = projet.graphe_historique
 
-    prediction = projet.prediction_date_fin
-    @prediction_date_fin = formulation_paco prediction
-    @conclusion = conclusion_paco projet, prediction
+    @prediction_date_fin = projet.formulation_paco
+    @tout_va_bien = projet.va_t_il_bien?
     
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @taches }
     end
   end
-
-
-  private
-
-  def formulation_paco prediction
-    (cas_normal? prediction) ? 
-      "Paco prédit que le projet se finira le #{I18n.l prediction}" : 
-      formulation[prediction]
-  end
-  
-  def conclusion_paco projet, prediction
-    return :ok if (prediction == :projet_termine) or (cas_normal?(prediction) and dans_les_clous?(projet, prediction))
-    :ko
-  end
-  
-  def dans_les_clous? projet, prediction
-    projet.deadline.nil? or projet.deadline >= prediction
-  end
-  
-  def cas_normal? prediction
-    formulation[prediction].nil?
-  end  
 end

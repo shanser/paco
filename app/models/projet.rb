@@ -1,5 +1,11 @@
 class Projet < ActiveRecord::Base
   has_many :taches
+
+  mattr_accessor :formulation
+  self.formulation = {:projet_termine => 'Paco constate que le projet est terminé',
+                      :projet_interminable => 'Paco prédit que le projet ne se terminera jamais à ce rythme',
+                      :projection_impossible => 'Paco ne sait pas encore prédire la date de fin du projet'}
+  
  
   def prediction_date_fin
     return :projet_termine if termine?
@@ -39,6 +45,21 @@ class Projet < ActiveRecord::Base
     retour[:data] = [abcisses, ordonnees].join('|')
     retour
   end
+  
+  def formulation_paco
+    prediction = prediction_date_fin
+    (cas_normal? prediction) ? 
+      "Paco prédit que le projet se finira le #{I18n.l prediction}" : 
+      formulation[prediction]
+  end
+  
+  def va_t_il_bien? 
+    prediction = prediction_date_fin
+    (prediction == :projet_termine) or (cas_normal?(prediction) and dans_les_clous?(prediction))
+  end
+  
+  
+  
   
   private
   
@@ -124,6 +145,16 @@ class Projet < ActiveRecord::Base
     end
     couples.unzip
   end
+  
+  def cas_normal? prediction
+    formulation[prediction].nil?
+  end  
+  
+  def dans_les_clous? prediction
+    deadline.nil? or deadline >= prediction
+  end
+  
+  
 end
 
 def cumuls valeurs
