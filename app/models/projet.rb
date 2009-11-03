@@ -47,7 +47,9 @@ class Projet < ActiveRecord::Base
   
   def va_t_il_bien? 
     prediction = prediction_date_fin
-    (prediction.first == "projet.termine") or (cas_normal?(prediction.first) and dans_les_clous?(prediction.last))
+    dans_les_clous = (prediction.first == 'projet.prediction' and (deadline.nil? or deadline >= prediction.last))
+    
+    (prediction.first == "projet.termine") or (dans_les_clous)
   end
   
   
@@ -136,14 +138,6 @@ class Projet < ActiveRecord::Base
       couples << [n, abcisse_intersection]
     end
     couples.unzip
-  end
-  
-  def cas_normal? prediction
-    prediction == 'projet.prediction'
-  end  
-  
-  def dans_les_clous? date_prediction
-    deadline.nil? or deadline >= date_prediction
   end
 end
 
