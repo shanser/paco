@@ -11,7 +11,6 @@ class ProjetsController < ApplicationController
     @taches = projet.taches
     @google_graph = projet.google_graph
     @graphe_historique = projet.graphe_historique
-
     @prediction_date_fin = projet.formulation_paco
     @tout_va_bien = projet.va_t_il_bien?
     

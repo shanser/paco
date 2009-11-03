@@ -3,6 +3,17 @@
 # contributor: Sebastien Grosjean - ZenCocoon.com
  
 fr:
+  
+  projet:
+    termine: "Paco constate que le projet est terminé"
+    interminable: "Paco prédit que le projet ne se terminera jamais à ce rythme"
+    projection_impossible: "Paco ne sait pas encore prédire la date de fin du projet"
+    prediction: "Paco prédit que le projet se finira le {{date}}"
+  
+  
+  
+  
+  
   date:
     formats:
       default: "%d %B %Y"

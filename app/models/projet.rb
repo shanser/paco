@@ -1,23 +1,17 @@
 class Projet < ActiveRecord::Base
   has_many :taches
 
-  mattr_accessor :formulation
-  self.formulation = {:projet_termine => 'Paco constate que le projet est terminé',
-                      :projet_interminable => 'Paco prédit que le projet ne se terminera jamais à ce rythme',
-                      :projection_impossible => 'Paco ne sait pas encore prédire la date de fin du projet'}
-  
- 
   def prediction_date_fin
-    return :projet_termine if termine?
+    return ['projet.termine', Time.now] if termine?
     begin
       abcisse_intersection = intersection_nuage_points nuage_points_entrees, nuage_points_sorties, x_debut_regression
     rescue Paco::CalculProjectionImpossible
-      return :projection_impossible
+      return ['projet.projection_impossible', Time.now]
     end
  
     date_projetee =  date_debut + abcisse_intersection.days
-    return :projet_interminable if date_projetee < Time.now.to_date
-    date_projetee
+    return ['projet.interminable', Time.now] if date_projetee < Time.now.to_date
+    ['projet.prediction', date_projetee]
   end
  
   def google_graph
@@ -48,14 +42,12 @@ class Projet < ActiveRecord::Base
   
   def formulation_paco
     prediction = prediction_date_fin
-    (cas_normal? prediction) ? 
-      "Paco prédit que le projet se finira le #{I18n.l prediction}" : 
-      formulation[prediction]
+    I18n.t(prediction.first, :date => I18n.l(prediction.last))
   end
   
   def va_t_il_bien? 
     prediction = prediction_date_fin
-    (prediction == :projet_termine) or (cas_normal?(prediction) and dans_les_clous?(prediction))
+    (prediction.first == "projet.termine") or (cas_normal?(prediction.first) and dans_les_clous?(prediction.last))
   end
   
   
@@ -147,14 +139,12 @@ class Projet < ActiveRecord::Base
   end
   
   def cas_normal? prediction
-    formulation[prediction].nil?
+    prediction == 'projet.prediction'
   end  
   
-  def dans_les_clous? prediction
-    deadline.nil? or deadline >= prediction
+  def dans_les_clous? date_prediction
+    deadline.nil? or deadline >= date_prediction
   end
-  
-  
 end
 
 def cumuls valeurs
