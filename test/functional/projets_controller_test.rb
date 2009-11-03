@@ -105,6 +105,25 @@ class ProjetsControllerTest < ActionController::TestCase
     assert_equal 5, assigns(:graphe_historique)[:max_y]
   end
   
+  test "sait afficher les tâches par étiquetage" do
+    cree_taches_finies [0], [1]
+
+    t1, t2 = Factory(:tag), Factory(:tag)
+    e1, e2, e3 = [t1, t2, t1].map{|tag| Factory :etiquetage, :tag => tag}
+    get :show
+    assert_response :success
+    assert_equal({t1.description => [e1, e3], t2.description => [e2]}, assigns(:etiquetages))
+  end
+
+  test "affiche à la fin les taches sans tag" do
+    tache_etiquetee, tache_non_etiquetee = Factory(:tache), Factory(:tache)
+    projet.taches << tache_etiquetee << tache_non_etiquetee
+    Factory(:etiquetage, :tache => tache_etiquetee)
+    get :show
+
+    assert_equal [tache_non_etiquetee], assigns(:taches)
+  end
+  
   private
   def cree_taches_finies dates_entree, dates_sortie
     dates = dates_entree.zip(dates_sortie)

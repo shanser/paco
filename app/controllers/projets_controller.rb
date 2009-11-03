@@ -14,6 +14,16 @@ class ProjetsController < ApplicationController
     @prediction_date_fin = projet.formulation_paco
     @tout_va_bien = projet.va_t_il_bien?
     
+    
+    etiquetages = Etiquetage.all(:include => :tag, :order => 'tags.description')
+    tags = etiquetages.collect(&:tag).uniq
+    @etiquetages = {}
+    tags.each {|tag| @etiquetages[tag.description] = etiquetages.select{|e| e.tag == tag}}
+    
+    taches_etiquetees = @etiquetages.values.flatten.collect(&:tache)
+    @taches = @taches - taches_etiquetees
+    
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @taches }

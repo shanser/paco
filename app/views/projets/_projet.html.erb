@@ -28,16 +28,17 @@
 <% end %>
 </div>
 
+<% @etiquetages.each do |tag, etiquetages| %>
+	<h4><%= tag %></h4>
+		<% for etiquetage in etiquetages do %>
+	    <%= render :partial => 'projets/tache', :locals => {:tache => etiquetage.tache} %>
+		<% end %>
+<% end %>
+
+<h4>Sans tag</h4>
 
 <% @taches.each do |tache| %>
-  <dl <%= "class='terminee'" if tache.terminee? %>'>
-    <dt>#<%=h tache.id %> : <%=h tache.description %></dt>
-    <dd>entrée le <%=l tache.date_entree %>, <%= "sortie le #{l tache.date_sortie}, statut #{tache.statut}," if tache.date_sortie %> poids <%=h tache.poids %></dd>
-    <%= "<dd> #{tache.commentaire} </dd>" if tache.commentaire %>
-		<% if mode_admin?  %>
-		<dd><%= link_to 'Edit', edit_admin_projet_tache_path(tache)  %> | <%= link_to 'Destroy', admin_projet_tache_path(tache), :confirm => 'Are you sure?', :method => :delete %></dd>
-		<% end %>
-  </dl>
+  <%= render :partial => 'projets/tache', :locals => {:tache => tache} %>
 <% end %>
 
 <div class='liens'>
