@@ -2,16 +2,16 @@ class Projet < ActiveRecord::Base
   has_many :taches
 
   def prediction_date_fin
-    return ['projet.termine', Time.now] if termine?
+    return Prediction.new 'projet.termine', Time.now if termine?
     begin
       abcisse_intersection = intersection_nuage_points nuage_points_entrees, nuage_points_sorties, x_debut_regression
     rescue Paco::CalculProjectionImpossible
-      return ['projet.projection_impossible', Time.now]
+      return Prediction.new 'projet.projection_impossible', Time.now
     end
  
     date_projetee =  date_debut + abcisse_intersection.days
-    return ['projet.interminable', Time.now] if date_projetee < Time.now.to_date
-    ['projet.prediction', date_projetee]
+    return Prediction.new 'projet.interminable', Time.now if date_projetee < Time.now.to_date
+    Prediction.new 'projet.prediction', date_projetee
   end
  
   def google_graph
@@ -42,14 +42,14 @@ class Projet < ActiveRecord::Base
   
   def formulation_paco
     prediction = prediction_date_fin
-    I18n.t(prediction.first, :date => I18n.l(prediction.last))
+    I18n.t(prediction.diagnostic, :date => I18n.l(prediction.date))
   end
   
   def va_t_il_bien? 
     prediction = prediction_date_fin
-    dans_les_clous = (prediction.first == 'projet.prediction' and (deadline.nil? or deadline >= prediction.last))
+    dans_les_clous = (prediction.diagnostic == 'projet.prediction' and (deadline.nil? or deadline >= prediction.date))
     
-    (prediction.first == "projet.termine") or (dans_les_clous)
+    (prediction.diagnostic == "projet.termine") or (dans_les_clous)
   end
   
   

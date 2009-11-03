@@ -19,21 +19,21 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_entrees [0], [3]
     bouchonne_taches_sorties [], []
     
-    assert_equal "projet.projection_impossible", projet.prediction_date_fin.first
+    assert_equal "projet.projection_impossible", projet.prediction_date_fin.diagnostic
   end
   
   test "génère une exception quand le backlog se remplit aussi vite qu'il se vide" do
     bouchonne_taches_entrees [0, 2], [3, 4]
     bouchonne_taches_sorties [2], [1]
     
-    assert_equal "projet.interminable", projet.prediction_date_fin.first
+    assert_equal "projet.interminable", projet.prediction_date_fin.diagnostic
   end
   
   test "génère une exception quand la projection est inférieure à la date du jour" do
     bouchonne_taches_entrees [0, 1], [3, 3]
     bouchonne_taches_sorties [0, 1], [1, 1]
     
-    assert_equal "projet.interminable", projet.prediction_date_fin.first
+    assert_equal "projet.interminable", projet.prediction_date_fin.diagnostic
   end
 
   test "sait calculer date projection fin quand le backlog ne bouge pas" do
@@ -89,8 +89,8 @@ class ProjetTest < ActiveSupport::TestCase
   private
   
   def assert_date_prediction_equal date_attendue, prediction
-    assert_equal 'projet.prediction', prediction.first
-    assert_equal date_attendue, prediction.last
+    assert_equal 'projet.prediction', prediction.diagnostic
+    assert_equal date_attendue, prediction.date
   end
   
   def bouchonne_requete_taches resultat_requete, parametres
