@@ -38,11 +38,6 @@ set :deploy_to, "/home/paco/rails"
 # set :scm, :subversion
 # see a full list by running "gem contents capistrano | grep 'scm/'"
 
-set :user, "paco"
-set :password, "paco"
-set :use_sudo, false
-set :admin_runner, "paco"
-
 before "deploy:update" do
   run "rake gems:install"
 end
