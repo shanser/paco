@@ -24,9 +24,11 @@
 <div class='liens'>
 <%= link_to 'Afficher/Masquer les tâches terminées', '#', :class => :toggle_terminees %>
 <% if mode_admin? %>
-	| <%= link_to 'Ajouter une tâche', new_admin_projet_tache_path %>
+	| <%= link_to 'Ajouter une tâche', new_admin_projet_tache_path, :id => 'nouvelle-tache' %>
 <% end %>
 </div>
+
+
 
 <% @etiquetages.each do |tag, etiquetages| %>
 	<h4><%= tag %></h4>
@@ -37,13 +39,17 @@
 
 <h4>Sans tag</h4>
 
-<% @taches.each do |tache| %>
-  <%= render :partial => 'projets/tache', :locals => {:tache => tache} %>
-<% end %>
+<div id='taches_sans_tag'>
+	<% @taches.each do |tache| %>
+	  <%= render :partial => 'projets/tache', :locals => {:tache => tache} %>
+	<% end %>
+</div>
 
 <div class='liens'>
 <%= link_to 'Afficher/Masquer les tâches terminées', '#', :class => :toggle_terminees %>
 <% if mode_admin? %>
-	| <%= link_to 'Ajouter une tâche', new_admin_projet_tache_path %>
+	| <%= link_to 'Ajouter une tâche', new_admin_projet_tache_path, :id => 'nouvelle-tache' %>
 <% end %>
 </div>
+
+<div id='new_tache_container'></div>

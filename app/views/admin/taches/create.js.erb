@@ -1,0 +1,9 @@
+function cache() {
+	$('#new_tache_container').slideToggle()
+}
+
+
+$('#taches_sans_tag').append("<%= escape_javascript(render(:partial => 'projets/tache', :locals => {:tache => @tache})) %>")
+$('#taches_sans_tag dl:last-child').hide().fadeIn(cache)
+
+

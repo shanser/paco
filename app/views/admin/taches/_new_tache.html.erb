@@ -1,0 +1,26 @@
+<% form_for(@tache, :url => admin_projet_taches_path) do |f| %>
+  <%= f.error_messages %>
+
+	<table>
+		<tr>
+			<td><%= f.label :description %></td>
+			<td><%= f.text_field :description %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :commentaire %></td>
+			<td><%= f.text_area :commentaire %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :poids %></td>
+			<td><%= f.text_field :poids %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :date_entree %></td>
+			<td><%= f.date_select :date_entree %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><%= f.submit 'Ajouter' %></td>
+		</tr>
+	</table>
+<% end %>

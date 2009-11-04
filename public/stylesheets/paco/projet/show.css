@@ -27,3 +27,38 @@
 #main .liens {
 	margin:10px 0;
 }
+
+#new_tache_container {
+	display:none;
+	background:#f3f3f3;
+	padding:10px;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	margin:20px 0;
+}
+
+#new_tache_container input, #new_tache_container textarea {
+	border:0 none;
+	font-family:'Lucida Grande';
+	font-size:14px;
+	padding:6px;
+	width:100%;
+}
+
+#new_tache_container textarea {
+	height:65px;
+}
+
+#new_tache_container table {
+	width:100%;
+}
+
+#new_tache_container td {
+	padding:5px 15px;
+}
+
+#new_tache_container #tache_submit {
+	background:#CCCCCC;
+	border:1px solid #999999;
+}

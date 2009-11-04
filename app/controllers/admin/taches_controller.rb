@@ -5,11 +5,6 @@ class Admin::TachesController < ApplicationController
   # GET /taches/new.xml
   def new
     @tache = Tache.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @tache }
-    end
   end
 
   # GET /taches/1/edit
@@ -29,9 +24,11 @@ class Admin::TachesController < ApplicationController
         flash[:notice] = 'Tache was successfully created.'
         format.html { redirect_to(admin_projet_path) }
         format.xml  { render :xml => @tache, :status => :created, :location => @tache }
+        format.js
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @tache.errors, :status => :unprocessable_entity }
+        format.js { render :action => "new" }
       end
     end
   end
