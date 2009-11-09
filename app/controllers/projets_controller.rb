@@ -8,7 +8,6 @@ class ProjetsController < ApplicationController
 
     projet = Projet.first
     @date_stabilisation_backlog = projet.date_stabilisation_backlog
-    @taches = projet.taches
     @google_graph = projet.google_graph
     @graphe_historique = projet.graphe_historique
     @prediction_date_fin = projet.formulation_paco
@@ -21,6 +20,7 @@ class ProjetsController < ApplicationController
     tags.each {|tag| @etiquetages[tag.description] = etiquetages.select{|e| e.tag == tag}}
     
     taches_etiquetees = @etiquetages.values.flatten.collect(&:tache)
+    @taches = projet.taches
     @taches = @taches - taches_etiquetees
     
     

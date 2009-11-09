@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	$('.toggle_terminees').click(function(e) {
-		e.preventDefault()
-		$(".terminee").slideToggle()
+	$('.toggle_terminees').click(function() {
+		$(".terminee").slideToggle();
+		return false
 	})
 	
 	$('#nouvelle-tache').live("click", function() {
