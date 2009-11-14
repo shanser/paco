@@ -19,35 +19,35 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_entrees [0], [3]
     bouchonne_taches_sorties [], []
     
-    assert_equal "projet.projection_impossible", projet.prediction_date_fin.diagnostic
+    assert_equal "projet.projection_impossible", projet.prediction_paco.diagnostic
   end
   
   test "génère une exception quand le backlog se remplit aussi vite qu'il se vide" do
     bouchonne_taches_entrees [0, 2], [3, 4]
     bouchonne_taches_sorties [2], [1]
     
-    assert_equal "projet.interminable", projet.prediction_date_fin.diagnostic
+    assert_equal "projet.interminable", projet.prediction_paco.diagnostic
   end
   
   test "génère une exception quand la projection est inférieure à la date du jour" do
     bouchonne_taches_entrees [0, 1], [3, 3]
     bouchonne_taches_sorties [0, 1], [1, 1]
     
-    assert_equal "projet.interminable", projet.prediction_date_fin.diagnostic
+    assert_equal "projet.interminable", projet.prediction_paco.diagnostic
   end
 
   test "sait calculer date projection fin quand le backlog ne bouge pas" do
     bouchonne_taches_entrees jours_apres_demarrage = [0], nb_taches_a_ces_jours = [3]
     bouchonne_taches_sorties [2, 4], [1, 1]
 
-    assert_prediction_duree_projet_equal 6.days, projet.prediction_date_fin
+    assert_prediction_duree_projet_equal 6.days, projet.prediction_paco
   end
 
   test "sait calculer date projection fin quand le backlog évolue" do
     bouchonne_taches_entrees jours_apres_demarrage = [0, 4], nb_taches_a_ces_jours = [2, 1]
     bouchonne_taches_sorties [2, 4], [1, 1]
 
-    assert_prediction_duree_projet_equal 8.days, projet.prediction_date_fin
+    assert_prediction_duree_projet_equal 8.days, projet.prediction_paco
   end
   
   test "nombre_taches_par_date rajoute un point au nuage si la dernière date retournée n'est pas aujourd'hui" do

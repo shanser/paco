@@ -10,6 +10,9 @@ class Prediction
     end
   end
   
+  def impossible?
+    @diagnostic == 'projet.projection_impossible'
+  end
   
   
   

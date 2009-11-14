@@ -1,7 +1,7 @@
 class Projet < ActiveRecord::Base
   has_many :taches
 
-  def prediction_date_fin
+  def prediction_paco
     Prediction.new nuage_points_entrees, nuage_points_sorties, x_debut_regression, termine?
   end
  
@@ -32,12 +32,12 @@ class Projet < ActiveRecord::Base
   end
   
   def formulation_paco
-    prediction = prediction_date_fin
+    prediction = prediction_paco
     I18n.t(prediction.diagnostic, :date => I18n.l(date_debut + prediction.duree_projet))
   end
   
   def va_t_il_bien? 
-    prediction = prediction_date_fin
+    prediction = prediction_paco
     dans_les_clous = (prediction.diagnostic == 'projet.prediction' and (deadline.nil? or deadline >= date_debut + prediction.duree_projet))
     
     (prediction.diagnostic == "projet.termine") or (dans_les_clous)
@@ -107,12 +107,6 @@ class Projet < ActiveRecord::Base
     jours_depuis_debut_projet date_stabilisation_backlog.to_i
   end
   
-  def intersection_nuage_points nuage_entrees, nuage_sorties, debut_regression
-    droite_entrees = nuage_entrees.regression_lineaire debut_regression
-    droite_sorties = nuage_sorties.regression_lineaire debut_regression
-    droite_entrees.abcisse_intersection_avec droite_sorties
-  end
-  
   def historique_projections
     couples = []
     1.upto(nuage_points_entrees.max_x) do |n|
@@ -120,17 +114,14 @@ class Projet < ActiveRecord::Base
       nuage_entrees = nuage_points_entrees date
       nuage_sorties = nuage_points_sorties date
 
-      begin
-        abcisse_intersection = intersection_nuage_points nuage_entrees, nuage_sorties, x_debut_regression
-        abcisse_intersection = abcisse_intersection.ceil
-      rescue Paco::CalculProjectionImpossible
-        abcisse_intersection = 0
-      end
+      prediction = Prediction.new nuage_entrees, nuage_sorties, x_debut_regression, false
+      abcisse_intersection = (prediction.impossible?) ? 0 : (prediction.duree_projet / 86400).ceil
       couples << [n, abcisse_intersection]
     end
     couples.unzip
   end
 end
+
 
 def cumuls valeurs
   resultat =[]

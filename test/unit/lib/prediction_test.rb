@@ -9,8 +9,9 @@ class PredictionTest < ActiveSupport::TestCase
   test 'projection impossible' do
     nuage_points_entrees = NuagePoints.new [0], [3]
     nuage_points_sorties = NuagePoints.new [], []
-
     prediction = nouvelle_prediction nuage_points_entrees, nuage_points_sorties, false
+
+    assert prediction.impossible?
     assert_equal 'projet.projection_impossible', prediction.diagnostic
   end
   
