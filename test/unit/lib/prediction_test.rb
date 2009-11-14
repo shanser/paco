@@ -3,7 +3,7 @@ require 'test_helper'
 class PredictionTest < ActiveSupport::TestCase
 
   def nouvelle_prediction nuage_points_entrees, nuage_points_sorties, projet_termine
-    Prediction.new nuage_points_entrees, nuage_points_sorties, 0, projet_termine
+    Prediction.new nuage_points_entrees, nuage_points_sorties, 0, date_reference, projet_termine
   end
 
   test 'projection impossible' do
@@ -13,6 +13,7 @@ class PredictionTest < ActiveSupport::TestCase
 
     assert prediction.impossible?
     assert_equal 'projet.projection_impossible', prediction.diagnostic
+    assert_equal 'Paco ne sait pas encore prédire la date de fin du projet', prediction.to_s
   end
   
   test 'projet interminable' do

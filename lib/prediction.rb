@@ -1,7 +1,8 @@
 class Prediction
   attr_reader :diagnostic, :duree_projet
 
-  def initialize nuage_points_entrees, nuage_points_sorties, abscisse_debut_regression, projet_termine
+  def initialize nuage_points_entrees, nuage_points_sorties, abscisse_debut_regression, date_debut_projet, projet_termine
+    @date_debut_projet = date_debut_projet
     @diagnostic = 'projet.termine'
     @duree_projet = 0.days
     
@@ -12,6 +13,10 @@ class Prediction
   
   def impossible?
     @diagnostic == 'projet.projection_impossible'
+  end
+  
+  def to_s
+    I18n.t(@diagnostic, :date => I18n.l(@date_debut_projet + @duree_projet))
   end
   
   

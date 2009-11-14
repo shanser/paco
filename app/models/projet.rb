@@ -2,7 +2,7 @@ class Projet < ActiveRecord::Base
   has_many :taches
 
   def prediction_paco
-    Prediction.new nuage_points_entrees, nuage_points_sorties, x_debut_regression, termine?
+    Prediction.new nuage_points_entrees, nuage_points_sorties, x_debut_regression, date_debut, termine?
   end
  
   def google_graph
@@ -32,8 +32,7 @@ class Projet < ActiveRecord::Base
   end
   
   def formulation_paco
-    prediction = prediction_paco
-    I18n.t(prediction.diagnostic, :date => I18n.l(date_debut + prediction.duree_projet))
+    prediction_paco.to_s
   end
   
   def va_t_il_bien? 
@@ -114,7 +113,7 @@ class Projet < ActiveRecord::Base
       nuage_entrees = nuage_points_entrees date
       nuage_sorties = nuage_points_sorties date
 
-      prediction = Prediction.new nuage_entrees, nuage_sorties, x_debut_regression, false
+      prediction = Prediction.new nuage_entrees, nuage_sorties, x_debut_regression, date_debut, false
       abcisse_intersection = (prediction.impossible?) ? 0 : (prediction.duree_projet / 86400).ceil
       couples << [n, abcisse_intersection]
     end
