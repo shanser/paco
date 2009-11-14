@@ -40,14 +40,14 @@ class ProjetTest < ActiveSupport::TestCase
     bouchonne_taches_entrees jours_apres_demarrage = [0], nb_taches_a_ces_jours = [3]
     bouchonne_taches_sorties [2, 4], [1, 1]
 
-    assert_date_prediction_equal demarrage + 6.days, projet.prediction_date_fin
+    assert_prediction_duree_projet_equal 6.days, projet.prediction_date_fin
   end
 
   test "sait calculer date projection fin quand le backlog évolue" do
     bouchonne_taches_entrees jours_apres_demarrage = [0, 4], nb_taches_a_ces_jours = [2, 1]
     bouchonne_taches_sorties [2, 4], [1, 1]
 
-    assert_date_prediction_equal demarrage + 8.days, projet.prediction_date_fin
+    assert_prediction_duree_projet_equal 8.days, projet.prediction_date_fin
   end
   
   test "nombre_taches_par_date rajoute un point au nuage si la dernière date retournée n'est pas aujourd'hui" do
@@ -88,9 +88,9 @@ class ProjetTest < ActiveSupport::TestCase
   
   private
   
-  def assert_date_prediction_equal date_attendue, prediction
+  def assert_prediction_duree_projet_equal duree_attendue, prediction
     assert_equal 'projet.prediction', prediction.diagnostic
-    assert_equal date_attendue, prediction.date
+    assert_equal duree_attendue, prediction.duree_projet
   end
   
   def bouchonne_requete_taches resultat_requete, parametres
