@@ -107,6 +107,7 @@ class Projet < ActiveRecord::Base
   end
   
   def historique_projections
+    return [[], []] if taches.empty?
     couples = []
     1.upto(nuage_points_entrees.max_x) do |n|
       date = date_debut + n.days

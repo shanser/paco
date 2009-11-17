@@ -2,11 +2,11 @@ class Prediction
   attr_reader :diagnostic, :duree_projet
 
   def initialize nuage_points_entrees, nuage_points_sorties, abscisse_debut_regression, date_debut_projet, projet_termine
-    @date_debut_projet = date_debut_projet
+    @date_debut_projet = date_debut_projet.nil? ? Time.now : date_debut_projet
     @diagnostic = 'projet.termine'
     @duree_projet = 0.days
     
-    if !projet_termine
+    unless projet_termine
       calcule_duree_projet nuage_points_entrees, nuage_points_sorties, abscisse_debut_regression
     end
   end

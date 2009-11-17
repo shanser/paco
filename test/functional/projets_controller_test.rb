@@ -124,6 +124,11 @@ class ProjetsControllerTest < ActionController::TestCase
     assert_equal [tache_non_etiquetee], assigns(:taches)
   end
   
+  test "sait afficher la page projet même sans tâche" do
+    get :show
+    assert_response :success
+  end
+  
   private
   def cree_taches_finies dates_entree, dates_sortie
     dates = dates_entree.zip(dates_sortie)
